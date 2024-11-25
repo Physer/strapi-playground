@@ -1,0 +1,37 @@
+{
+  "kind": "singleType",
+  "collectionName": "homepages",
+  "info": {
+    "singularName": "homepage",
+    "pluralName": "homepages",
+    "displayName": "Homepage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "navigation_bar": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::navigation-bar.navigation-bar"
+    },
+    "MainBody": {
+      "type": "dynamiczone",
+      "components": [
+        "custom.hero"
+      ],
+      "required": true
+    }
+  }
+}
