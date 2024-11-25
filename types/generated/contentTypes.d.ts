@@ -369,9 +369,11 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiNavigationBarNavigationBar extends Struct.SingleTypeSchema {
+export interface ApiNavigationBarNavigationBar
+  extends Struct.CollectionTypeSchema {
   collectionName: 'navigation_bars';
   info: {
+    description: '';
     displayName: 'Navigation bar';
     pluralName: 'navigation-bars';
     singularName: 'navigation-bar';

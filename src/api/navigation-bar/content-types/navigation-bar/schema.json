@@ -1,10 +1,11 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "navigation_bars",
   "info": {
     "singularName": "navigation-bar",
     "pluralName": "navigation-bars",
-    "displayName": "Navigation bar"
+    "displayName": "Navigation bar",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,13 +13,13 @@
   "pluginOptions": {},
   "attributes": {
     "Logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
+      ]
     },
     "NavigationItems": {
       "type": "component",
