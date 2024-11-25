@@ -54,6 +54,18 @@ export interface CustomHero extends Struct.ComponentSchema {
   };
 }
 
+export interface NavigationNavigationItem extends Struct.ComponentSchema {
+  collectionName: 'components_navigation_navigation_items';
+  info: {
+    displayName: 'NavigationItem';
+    icon: 'link';
+  };
+  attributes: {
+    Name: Schema.Attribute.String & Schema.Attribute.Required;
+    URL: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -61,6 +73,7 @@ declare module '@strapi/strapi' {
       'carousel.carousel-item': CarouselCarouselItem;
       'carousel.carousel-text': CarouselCarouselText;
       'custom.hero': CustomHero;
+      'navigation.navigation-item': NavigationNavigationItem;
     }
   }
 }
