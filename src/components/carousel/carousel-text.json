@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_carousel_carousel_texts",
+  "info": {
+    "displayName": "CarouselText",
+    "icon": "pencil",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Text": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

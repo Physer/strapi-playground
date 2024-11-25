@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_carousel_carousels",
+  "info": {
+    "displayName": "Carousel",
+    "icon": "slideshow",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "CarouselSlider": {
+      "displayName": "CarouselText",
+      "type": "component",
+      "repeatable": true,
+      "component": "carousel.carousel-text"
+    },
+    "CarouselItems": {
+      "type": "component",
+      "repeatable": true,
+      "component": "carousel.carousel-item",
+      "required": false
+    }
+  }
+}
