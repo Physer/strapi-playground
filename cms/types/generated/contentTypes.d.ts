@@ -390,8 +390,6 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
       'api::homepage.homepage'
     > &
       Schema.Attribute.Private;
-    Logo: Schema.Attribute.Media<'images' | 'files'> &
-      Schema.Attribute.Required;
     MainBody: Schema.Attribute.DynamicZone<['custom.hero']> &
       Schema.Attribute.Required;
     navigation_bar: Schema.Attribute.Relation<

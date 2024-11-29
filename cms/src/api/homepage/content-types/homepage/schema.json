@@ -12,15 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Logo": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images",
-        "files"
-      ]
-    },
     "navigation_bar": {
       "type": "relation",
       "relation": "oneToOne",
