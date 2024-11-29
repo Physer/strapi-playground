@@ -1,18 +1,22 @@
 {
-  "name": "@physer/site-xprtz",
-  "version": "0.1.0",
-  "private": true,
-  "type": "module",
-  "author": "Alex Schouls",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "astro": "^4.16.16",
-    "@astrojs/check": "^0.9.4",
-    "typescript": "^5.7.2"
-  }
+    "name": "@physer/site-xprtz",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "author": "Alex Schouls",
+    "scripts": {
+        "dev": "astro dev",
+        "build": "astro check && astro build",
+        "preview": "astro preview",
+        "astro": "astro",
+        "format": "prettier . --write"
+    },
+    "dependencies": {
+        "@astrojs/check": "^0.9.4",
+        "astro": "^4.16.16",
+        "typescript": "^5.7.2"
+    },
+    "devDependencies": {
+        "prettier": "^3.4.1"
+    }
 }

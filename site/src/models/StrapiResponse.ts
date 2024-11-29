@@ -4,12 +4,12 @@ export interface StrapiResponse {
 }
 
 export interface StrapiData {
-  id: number;
-  documentId: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  cmsName?: string;
+    id: number;
+    documentId: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    cmsName?: string;
 }
 
 interface StrapiMeta {}

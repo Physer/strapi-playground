@@ -1,5 +1,3 @@
-import type { StrapiData } from "./StrapiResponse";
+import type { StrapiData } from './StrapiResponse';
 
-export interface Homepage extends StrapiData {
-    
-}
+export interface Homepage extends StrapiData {}
