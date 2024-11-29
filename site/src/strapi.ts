@@ -1,16 +1,16 @@
 import { StrapiResponse } from "./models/StrapiResponse";
 
-const { STRAPI_API_TOKEN, STRAPI_BASE_URL } = process.env;
+const { VITE_STRAPI_API_TOKEN, VITE_STRAPI_BASE_URL } = import.meta.env;
 
 export async function makeRequest(
   path: string,
   populateQuery: string = "*"
 ): Promise<StrapiResponse> {
   const response = await fetch(
-    `${STRAPI_BASE_URL}/${path}?populate=${populateQuery}`,
+    `${VITE_STRAPI_BASE_URL}/${path}?populate=${populateQuery}`,
     {
       headers: {
-        Authorization: `Bearer ${STRAPI_API_TOKEN}`,
+        Authorization: `Bearer ${VITE_STRAPI_API_TOKEN}`,
       },
     }
   );
