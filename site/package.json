@@ -2,16 +2,17 @@
   "name": "@physer/site-xprtz",
   "version": "0.1.0",
   "private": true,
-  "source": "index.html",
-  "author": "Alex Schouls",
   "type": "module",
+  "author": "Alex Schouls",
   "scripts": {
-    "develop": "vite dev",
-    "build": "vite build"
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
-  "devDependencies": {
-    "@types/node": "^22.10.1",
-    "typescript": "^5.7.2",
-    "vite": "^6.0.1"
+  "dependencies": {
+    "astro": "^4.16.16",
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.7.2"
   }
 }
