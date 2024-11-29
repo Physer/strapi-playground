@@ -9,7 +9,7 @@
         "build": "astro check && astro build",
         "preview": "astro preview",
         "astro": "astro",
-        "format": "prettier . --write"
+        "format": "prettier **/*.{js,ts,html,json,astro} --write"
     },
     "dependencies": {
         "@astrojs/check": "^0.9.4",
@@ -17,6 +17,7 @@
         "typescript": "^5.7.2"
     },
     "devDependencies": {
-        "prettier": "^3.4.1"
+        "prettier": "^3.4.1",
+        "prettier-plugin-astro": "^0.14.1"
     }
 }
