@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "layouts",
+  "info": {
+    "singularName": "layout",
+    "pluralName": "layouts",
+    "displayName": "Layout"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "navigation_bar": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::navigation-bar.navigation-bar"
+    }
+  }
+}
