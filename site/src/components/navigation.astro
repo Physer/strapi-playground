@@ -1,9 +1,16 @@
 ---
+import { getLayout, makeRequest } from '../helpers/strapi';
+import type { NavigationBar, NavigationItem } from '../models/NavigationBar';
+
+const layout = await getLayout();
+const navigationBar = (await makeRequest(`navigation-bars/${layout.data.navigation_bar.documentId}`)) as NavigationBar;
+const imageUrl = `${import.meta.env.STRAPI_BASE_URL}${navigationBar.data.Logo.url}`;
 ---
+
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="./assets/logo.png" alt="XPRTZ.net" width="200" height="70" />
+            <img src={imageUrl} alt="XPRTZ.net" width="200" height="70" />
         </a>
         <button
             class="navbar-toggler"
@@ -17,11 +24,15 @@
         </button>
         <div class="navbar-collapse collapse justify-content-end" id="navbarToggler">
             <div class="navbar-nav">
-                <a class="nav-link" href="#">Loading</a>
-                <a class="nav-link" href="#">Loading</a>
-                <a class="nav-link" href="#">Loading</a>
-                <a class="nav-link" href="#">Loading</a>
-                <a class="nav-link" href="#">Loading</a>
+                {
+                    navigationBar.data.NavigationItems.map(
+                        (item): NavigationItem => (
+                            <a class="nav-link" href={item.URL}>
+                                {item.Name}
+                            </a>
+                        )
+                    )
+                }
             </div>
         </div>
     </div>
