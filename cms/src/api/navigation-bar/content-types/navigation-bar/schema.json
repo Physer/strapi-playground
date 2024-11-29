@@ -4,8 +4,7 @@
   "info": {
     "singularName": "navigation-bar",
     "pluralName": "navigation-bars",
-    "displayName": "Navigation bar",
-    "description": ""
+    "displayName": "Navigation bar"
   },
   "options": {
     "draftAndPublish": true
@@ -13,13 +12,12 @@
   "pluginOptions": {},
   "attributes": {
     "Logo": {
+      "allowedTypes": [
+        "images"
+      ],
       "type": "media",
       "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images",
-        "files"
-      ]
+      "required": true
     },
     "NavigationItems": {
       "type": "component",
@@ -28,8 +26,7 @@
     },
     "CmsName": {
       "type": "string",
-      "required": true,
-      "unique": true
+      "required": true
     }
   }
 }

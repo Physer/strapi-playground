@@ -392,10 +392,6 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     MainBody: Schema.Attribute.DynamicZone<['custom.hero']> &
       Schema.Attribute.Required;
-    navigation_bar: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::navigation-bar.navigation-bar'
-    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -407,7 +403,6 @@ export interface ApiNavigationBarNavigationBar
   extends Struct.CollectionTypeSchema {
   collectionName: 'navigation_bars';
   info: {
-    description: '';
     displayName: 'Navigation bar';
     pluralName: 'navigation-bars';
     singularName: 'navigation-bar';
@@ -416,9 +411,7 @@ export interface ApiNavigationBarNavigationBar
     draftAndPublish: true;
   };
   attributes: {
-    CmsName: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    CmsName: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -428,8 +421,7 @@ export interface ApiNavigationBarNavigationBar
       'api::navigation-bar.navigation-bar'
     > &
       Schema.Attribute.Private;
-    Logo: Schema.Attribute.Media<'images' | 'files'> &
-      Schema.Attribute.Required;
+    Logo: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     NavigationItems: Schema.Attribute.Component<
       'navigation.navigation-item',
       true

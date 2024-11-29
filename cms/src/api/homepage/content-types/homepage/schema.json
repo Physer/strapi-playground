@@ -12,11 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "navigation_bar": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::navigation-bar.navigation-bar"
-    },
     "MainBody": {
       "type": "dynamiczone",
       "components": [
