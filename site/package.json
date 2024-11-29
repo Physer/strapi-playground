@@ -9,7 +9,9 @@
     "build": "shx rm -r ./dist && parcel build"
   },
   "devDependencies": {
+    "@types/node": "^22.10.1",
     "parcel": "^2.13.2",
-    "shx": "^0.3.4"
+    "shx": "^0.3.4",
+    "typescript": "^5.7.2"
   }
 }
