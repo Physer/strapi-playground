@@ -43,14 +43,17 @@ export interface CarouselCarouselText extends Struct.ComponentSchema {
 export interface CustomHero extends Struct.ComponentSchema {
   collectionName: 'components_custom_heroes';
   info: {
+    description: '';
     displayName: 'Hero';
     icon: 'picture';
   };
   attributes: {
     BackgroundImage: Schema.Attribute.Media<'images' | 'files'> &
       Schema.Attribute.Required;
+    CmsName: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     MainImage: Schema.Attribute.Media<'images' | 'files'>;
-    Name: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 

@@ -416,6 +416,9 @@ export interface ApiNavigationBarNavigationBar
     draftAndPublish: true;
   };
   attributes: {
+    CmsName: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

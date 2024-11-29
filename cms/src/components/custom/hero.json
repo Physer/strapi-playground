@@ -2,30 +2,33 @@
   "collectionName": "components_custom_heroes",
   "info": {
     "displayName": "Hero",
-    "icon": "picture"
+    "icon": "picture",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "Name": {
-      "type": "string",
-      "required": true
-    },
     "MainImage": {
-      "allowedTypes": [
-        "images",
-        "files"
-      ],
-      "type": "media",
-      "multiple": false
-    },
-    "BackgroundImage": {
-      "allowedTypes": [
-        "images",
-        "files"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "BackgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "CmsName": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }
