@@ -1,0 +1,15 @@
+{
+  "name": "@physer/strapi-xprtz",
+  "version": "0.1.0",
+  "private": true,
+  "source": "index.html",
+  "author": "Alex Schouls",
+  "scripts": {
+    "develop": "shx rm -r ./dist && parcel serve",
+    "build": "shx rm -r ./dist && parcel build"
+  },
+  "devDependencies": {
+    "parcel": "^2.13.2",
+    "shx": "^0.3.4"
+  }
+}
