@@ -25,7 +25,10 @@ const homepageWithHero = (await makeRequest('homepage', 'populate[hero][populate
     <body>
         <div class="container-fluid g-0">
             <Navigation />
-            <Hero backgroundImageUrl={homepageWithHero.data.hero.backgroundImage.url} mainImageUrl={homepageWithHero.data.hero.mainImage.url} />
+            <Hero
+                backgroundImageUrl={homepageWithHero.data.hero.backgroundImage.url}
+                mainImageUrl={homepageWithHero.data.hero.mainImage.url}
+            />
         </div>
         <script
             is:inline

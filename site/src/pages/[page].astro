@@ -1,0 +1,11 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { makeRequest } from '../helpers/strapi';
+import type { Contentpage } from '../models/Contentpage';
+
+export const getStaticPaths = (async () => {
+    const contentPage = (await makeRequest('contentpages')) as Contentpage;
+    const routeParams = contentPage.data.map((contentPage) => ({ params: { page: contentPage.url } }));
+    return routeParams;
+}) satisfies GetStaticPaths;
+---

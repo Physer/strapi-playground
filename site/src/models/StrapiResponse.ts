@@ -1,5 +1,5 @@
 export interface StrapiResponse {
-    data: StrapiData;
+    data: StrapiData | Array<StrapiData>;
     meta: StrapiMeta;
 }
 
