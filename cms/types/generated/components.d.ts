@@ -40,20 +40,16 @@ export interface CarouselCarouselText extends Struct.ComponentSchema {
   };
 }
 
-export interface CustomHero extends Struct.ComponentSchema {
-  collectionName: 'components_custom_heroes';
+export interface ContentHero extends Struct.ComponentSchema {
+  collectionName: 'components_content_heroes';
   info: {
-    description: '';
     displayName: 'Hero';
-    icon: 'picture';
+    icon: 'layout';
   };
   attributes: {
-    BackgroundImage: Schema.Attribute.Media<'images' | 'files'> &
+    backgroundImage: Schema.Attribute.Media<'images'> &
       Schema.Attribute.Required;
-    CmsName: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    MainImage: Schema.Attribute.Media<'images' | 'files'>;
+    mainImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
   };
 }
 
@@ -75,7 +71,7 @@ declare module '@strapi/strapi' {
       'carousel.carousel': CarouselCarousel;
       'carousel.carousel-item': CarouselCarouselItem;
       'carousel.carousel-text': CarouselCarouselText;
-      'custom.hero': CustomHero;
+      'content.hero': ContentHero;
       'navigation.navigation-item': NavigationNavigationItem;
     }
   }

@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_content_heroes",
+  "info": {
+    "displayName": "Hero",
+    "icon": "layout"
+  },
+  "options": {},
+  "attributes": {
+    "backgroundImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "mainImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

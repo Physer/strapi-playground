@@ -12,11 +12,10 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "MainBody": {
-      "type": "dynamiczone",
-      "components": [
-        "custom.hero"
-      ],
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "content.hero",
       "required": true
     }
   }
