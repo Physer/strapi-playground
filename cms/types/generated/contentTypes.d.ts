@@ -372,6 +372,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiContentpageContentpage extends Struct.CollectionTypeSchema {
   collectionName: 'contentpages';
   info: {
+    description: '';
     displayName: 'Contentpage';
     pluralName: 'contentpages';
     singularName: 'contentpage';
@@ -396,6 +397,9 @@ export interface ApiContentpageContentpage extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    url: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
   };
 }
 

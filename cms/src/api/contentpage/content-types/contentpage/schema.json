@@ -4,7 +4,8 @@
   "info": {
     "singularName": "contentpage",
     "pluralName": "contentpages",
-    "displayName": "Contentpage"
+    "displayName": "Contentpage",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,11 +20,17 @@
       "type": "blocks"
     },
     "contacts": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "url": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }
