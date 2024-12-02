@@ -1,0 +1,26 @@
+services:
+  strapi:
+    container_name: cms
+    build:
+      context: .
+      dockerfile: infrastructure/Dockerfile.cms
+    env_file:
+      - cms/.env
+    environment:
+      - DATABASE_CLIENT=mysql
+      - DATABASE_HOST=database
+    ports:
+      - 1337
+    restart: always
+    depends_on:
+      - database
+  database:
+    container_name: database
+    image: mysql:latest
+    env_file:
+      - cms/.env
+    volumes:
+      - cms-data:/var/lib/mysql
+
+volumes:
+  cms-data:

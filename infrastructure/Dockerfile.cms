@@ -1,0 +1,19 @@
+FROM node:20 AS build-env
+
+WORKDIR /cms
+COPY ./cms .
+
+RUN npm ci && \
+    npm run build
+
+FROM node:20-alpine AS runtime
+ENV NODE_ENV=production
+
+WORKDIR /app
+COPY --from=build-env /cms/package* ./
+COPY --from=build-env /cms/dist ./
+COPY --from=build-env /cms/public ./public
+
+RUN npm ci --omit=dev
+EXPOSE 1337
+ENTRYPOINT [ "npm", "run", "start" ]
