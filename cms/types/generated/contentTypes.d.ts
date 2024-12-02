@@ -369,7 +369,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiContentpageContentpage extends Struct.SingleTypeSchema {
+export interface ApiContentpageContentpage extends Struct.CollectionTypeSchema {
   collectionName: 'contentpages';
   info: {
     displayName: 'Contentpage';

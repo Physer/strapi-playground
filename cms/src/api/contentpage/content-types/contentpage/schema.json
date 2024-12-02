@@ -1,5 +1,5 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "contentpages",
   "info": {
     "singularName": "contentpage",
@@ -16,8 +16,7 @@
       "required": true
     },
     "content": {
-      "type": "blocks",
-      "required": false
+      "type": "blocks"
     },
     "contacts": {
       "allowedTypes": [
