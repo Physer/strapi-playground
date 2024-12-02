@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "contentpages",
+  "info": {
+    "singularName": "contentpage",
+    "pluralName": "contentpages",
+    "displayName": "Contentpage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "header": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "blocks",
+      "required": false
+    },
+    "contacts": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}
