@@ -1,10 +1,10 @@
 ---
-import { getLayout, makeRequest } from '../helpers/strapi';
+import { constructFullCmsUrl, getLayout, makeRequest } from '../helpers/strapi';
 import type { NavigationBar, NavigationItem } from '../models/NavigationBar';
 
 const layout = await getLayout();
 const navigationBar = (await makeRequest(`navigation-bars/${layout.data.navigation_bar.documentId}`)) as NavigationBar;
-const imageUrl = `${import.meta.env.STRAPI_BASE_URL}${navigationBar.data.Logo.url}`;
+const imageUrl = constructFullCmsUrl(navigationBar.data.Logo.url);
 ---
 
 <nav class="navbar navbar-expand-lg">

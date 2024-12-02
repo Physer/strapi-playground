@@ -1,6 +1,10 @@
 ---
 import Hero from '../components/hero.astro';
 import Navigation from '../components/navigation.astro';
+import { makeRequest } from '../helpers/strapi';
+import type { Homepage } from '../models/Homepage';
+
+const homepageWithHero = (await makeRequest('homepage', 'populate[hero][populate]=*')) as Homepage;
 ---
 
 <!doctype html>
@@ -21,7 +25,7 @@ import Navigation from '../components/navigation.astro';
     <body>
         <div class="container-fluid g-0">
             <Navigation />
-            <Hero />
+            <Hero backgroundImageUrl={homepageWithHero.data.hero.backgroundImage.url} mainImageUrl={homepageWithHero.data.hero.mainImage.url} />
         </div>
         <script
             is:inline

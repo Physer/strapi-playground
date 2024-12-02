@@ -1,16 +1,13 @@
 import type { StrapiData, StrapiResponse } from './StrapiResponse';
+import type { Image } from './Image';
 
 export interface NavigationBar extends StrapiResponse {
     data: NavigationBarData;
 }
 
 interface NavigationBarData extends StrapiData {
-    Logo: Logo;
+    Logo: Image;
     NavigationItems: Array<NavigationItem>;
-}
-
-interface Logo extends StrapiData {
-    url: string;
 }
 
 export interface NavigationItem extends StrapiData {
