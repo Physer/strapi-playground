@@ -7,9 +7,9 @@ const navigationBar = (await makeRequest(`navigation-bars/${layout.data.navigati
 const imageUrl = constructFullCmsUrl(navigationBar.data.Logo.url);
 ---
 
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg bg-white">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             <img src={imageUrl} alt="XPRTZ.net" width="200" height="70" />
         </a>
         <button
