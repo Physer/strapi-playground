@@ -17,6 +17,5 @@ export async function makeRequest(path: string, populateQuery: string = '*'): Pr
 }
 
 export async function getLayout(): Promise<Layout> {
-    const layout = (await makeRequest('layout')) as unknown;
-    return layout as Layout;
+    return (await makeRequest('layout')) as Layout;
 }
