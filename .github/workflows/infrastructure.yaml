@@ -10,6 +10,9 @@ on:
       - ".github/workflows/**"
       - "infrastructure/**"
 
+permissions:
+  id-token: write
+
 env:
   environment: production
 
