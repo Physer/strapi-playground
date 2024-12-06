@@ -1,13 +1,13 @@
-import { appendHash, removeHyphens } from './utilities.bicep'
+targetScope = 'subscription'
 
-param acrSku string = 'Basic'
+param environment string
 
-var location = resourceGroup().location
+resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-07-01' = {
+  name: 'rg-strapi-playground-${environment}'
+  location: deployment().location
+}
 
-resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-11-01-preview' = {
-  name: removeHyphens(appendHash('acrstrapi'))
-  location: location
-  sku: {
-    name: acrSku
-  }
+module containerRegistry 'modules/registry.bicep' = {
+  scope: resourceGroup
+  name: 'deployContainerRegistry'
 }
