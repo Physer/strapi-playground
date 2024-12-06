@@ -38,3 +38,4 @@ jobs:
           scope: "subscription"
           template: ./infrastructure/infrastructure.bicep
           parameters: ${{ github.env.environment }}
+          region: ${{ vars.AZURE_REGION }}
