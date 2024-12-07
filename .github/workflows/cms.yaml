@@ -22,6 +22,7 @@ jobs:
       containerRegistryName: ${{ steps.deployinfra.outputs.containerRegistryName }}
       containerAppEnvironmentName: ${{ steps.deployinfra.outputs.containerAppEnvironmentName }}
       containerAppName: ${{ steps.deployinfra.outputs.containerAppName }}
+      resourceGroupName: ${{ steps.deployinfra.outputs.resourceGroupName }}
     steps:
       - uses: actions/checkout@v4
 
@@ -63,3 +64,4 @@ jobs:
           acrName: ${{ needs.deploy_infra.outputs.containerRegistryName }}
           containerAppEnvironment: ${{ needs.deploy_infra.outputs.containerAppEnvironmentName }}
           containerAppName: ${{ needs.deploy_infra.outputs.containerAppName }}
+          resourceGroup: ${{ needs.deploy_infra.outputs.resourceGroupName }}
