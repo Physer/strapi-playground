@@ -33,3 +33,4 @@ module cmsContainerApp 'modules/containerApp.bicep' = {
 output containerRegistryName string = containerRegistry.outputs.containerRegistryName
 output containerAppEnvironmentName string = cmsContainerApp.outputs.containerAppEnvironmentName
 output containerAppName string = cmsContainerApp.outputs.containerAppName
+output resourceGroupName string = resourceGroup.name
