@@ -29,3 +29,7 @@ module cmsContainerApp 'modules/containerApp.bicep' = {
     logAnalyicsWorkspaceName: logAnalyticsWorkspace.outputs.resourceName
   }
 }
+
+output containerRegistryName string = containerRegistry.outputs.containerRegistryName
+output containerAppEnvironmentName string = cmsContainerApp.outputs.containerAppEnvironmentName
+output containerAppName string = cmsContainerApp.outputs.containerAppName

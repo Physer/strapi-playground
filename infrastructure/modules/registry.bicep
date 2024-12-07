@@ -9,3 +9,5 @@ resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-11-01-pr
     name: acrSku
   }
 }
+
+output containerRegistryName string = containerRegistry.name
