@@ -34,6 +34,9 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-08-02-p
 resource containerApp 'Microsoft.App/containerApps@2024-08-02-preview' = {
   location: location
   name: appendHash(containerAppName)
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     managedEnvironmentId: containerAppEnvironment.id
     configuration: {
@@ -70,3 +73,4 @@ resource containerApp 'Microsoft.App/containerApps@2024-08-02-preview' = {
 
 output containerAppEnvironmentName string = containerAppEnvironment.name
 output containerAppName string = containerApp.name
+output containerAppIdentityPrincipalId string = containerApp.identity.principalId

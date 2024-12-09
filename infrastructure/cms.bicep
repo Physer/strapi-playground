@@ -30,6 +30,15 @@ module cmsContainerApp 'modules/containerApp.bicep' = {
   }
 }
 
+module containerRegistryAccess 'modules/registryAccess.bicep' = {
+  scope: resourceGroup
+  name: 'deployRegistryAccessRules'
+  params: {
+    containerRegistryName: containerRegistry.outputs.containerRegistryName
+    principalId: cmsContainerApp.outputs.containerAppIdentityPrincipalId
+  }
+}
+
 output containerRegistryName string = containerRegistry.outputs.containerRegistryName
 output containerAppEnvironmentName string = cmsContainerApp.outputs.containerAppEnvironmentName
 output containerAppName string = cmsContainerApp.outputs.containerAppName
