@@ -66,3 +66,4 @@ jobs:
           containerAppName: ${{ needs.deploy_infra.outputs.containerAppName }}
           resourceGroup: ${{ needs.deploy_infra.outputs.resourceGroupName }}
           dockerfilePath: infrastructure/Dockerfile.cms
+          imageToBuild: ${{ needs.deploy_infra.outputs.containerRegistryName }}/strapi-playground/cms:latest
