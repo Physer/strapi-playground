@@ -23,6 +23,7 @@ jobs:
       containerAppEnvironmentName: ${{ steps.deployinfra.outputs.containerAppEnvironmentName }}
       containerAppName: ${{ steps.deployinfra.outputs.containerAppName }}
       resourceGroupName: ${{ steps.deployinfra.outputs.resourceGroupName }}
+      resourceLocation: ${{ steps.deployinfra.outputs.resourceLocation }}
     steps:
       - uses: actions/checkout@v4
 
@@ -67,3 +68,4 @@ jobs:
           resourceGroup: ${{ needs.deploy_infra.outputs.resourceGroupName }}
           dockerfilePath: infrastructure/Dockerfile.cms
           imageToBuild: ${{ needs.deploy_infra.outputs.containerRegistryName }}.azurecr.io/strapi-playground/cms:latest
+          location: ${{ needs.deploy_infra.outputs.resourceLocation }}

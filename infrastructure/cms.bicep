@@ -55,3 +55,4 @@ output containerRegistryName string = containerRegistry.outputs.containerRegistr
 output containerAppEnvironmentName string = cmsContainerApp.outputs.containerAppEnvironmentName
 output containerAppName string = cmsContainerApp.outputs.containerAppName
 output resourceGroupName string = resourceGroup.name
+output resourceLocation string = resourceGroup.location
