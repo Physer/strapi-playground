@@ -27,6 +27,7 @@ module cmsContainerApp 'modules/containerApp.bicep' = {
     containerAppName: 'ca-cms'
     imageName: 'nginx:latest'
     logAnalyicsWorkspaceName: logAnalyticsWorkspace.outputs.resourceName
+    targetPort: 1337
   }
 }
 
