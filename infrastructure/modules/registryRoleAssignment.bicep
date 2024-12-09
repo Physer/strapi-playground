@@ -1,8 +1,6 @@
 param principalId string
 param containerRegistryName string
-
-var acrPullRoleDefinitionId = '7f951dda-4ed3-4680-a7ca-43fe172d538d'
-var acrPullRoleAssignment = guid(principalId, acrPullRoleDefinitionId, resourceGroup().id)
+param roleDefinitionId string
 
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-11-01-preview' existing = {
   name: containerRegistryName
@@ -10,9 +8,9 @@ resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-11-01-pr
 
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: containerRegistry
-  name: acrPullRoleAssignment
+  name: guid(principalId, roleDefinitionId, resourceGroup().id)
   properties: {
     principalId: principalId
-    roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', acrPullRoleDefinitionId)
+    roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
   }
 }

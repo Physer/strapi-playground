@@ -3,6 +3,7 @@ import { appendHash } from './utilities.bicep'
 targetScope = 'subscription'
 
 param environment string
+param deploymentServicePrincipalId string
 
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-07-01' = {
   name: 'rg-strapi-playground-${environment}'
@@ -30,12 +31,23 @@ module cmsContainerApp 'modules/containerApp.bicep' = {
   }
 }
 
-module containerRegistryAccess 'modules/registryAccess.bicep' = {
+module deploymentAcrPushRoleAssignment 'modules/registryRoleAssignment.bicep' = {
   scope: resourceGroup
-  name: 'deployRegistryAccessRules'
+  name: 'deployAcrPushRoleAssignment'
+  params: {
+    containerRegistryName: containerRegistry.outputs.containerRegistryName
+    principalId: deploymentServicePrincipalId
+    roleDefinitionId: '8311e382-0749-4cb8-b61a-304f252e45ec'
+  }
+}
+
+module containerAcrPullRoleAssignment 'modules/registryRoleAssignment.bicep' = {
+  scope: resourceGroup
+  name: 'deployAcrPullRoleAssignment'
   params: {
     containerRegistryName: containerRegistry.outputs.containerRegistryName
     principalId: cmsContainerApp.outputs.containerAppIdentityPrincipalId
+    roleDefinitionId: '7f951dda-4ed3-4680-a7ca-43fe172d538d'
   }
 }
 
