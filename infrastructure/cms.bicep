@@ -3,7 +3,6 @@ import { appendHash } from './utilities.bicep'
 targetScope = 'subscription'
 
 param environment string
-param servicePrincipalId string
 
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-07-01' = {
   name: 'rg-strapi-playground-${environment}'
@@ -13,9 +12,6 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-07-01' = {
 module containerRegistry 'modules/registry.bicep' = {
   scope: resourceGroup
   name: 'deployContainerRegistry'
-  params: {
-    principalId: servicePrincipalId
-  }
 }
 
 module logAnalyticsWorkspace 'modules/logAnalytics.bicep' = {
