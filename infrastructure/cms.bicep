@@ -4,7 +4,7 @@ targetScope = 'subscription'
 
 param environment string
 @secure()
-param secrets object
+param secrets string
 
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-07-01' = {
   name: 'rg-strapi-playground-${environment}'
@@ -15,7 +15,7 @@ module keyVault 'modules/keyVault.bicep' = {
   scope: resourceGroup
   name: 'deployKeyVault'
   params: {
-    secrets: secrets
+    secrets: json(secrets)
   }
 }
 
