@@ -2,7 +2,7 @@ import { appendHash } from '../utilities.bicep'
 
 param sku string = 'standard'
 @secure()
-param secrets object
+param secrets string
 
 resource keyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' = {
   name: appendHash('kv-strapi-playground')
@@ -18,7 +18,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' = {
 }
 
 resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2024-04-01-preview' = [
-  for secret in items(secrets): {
+  for secret in items(json(secrets)): {
     parent: keyVault
     name: secret.key
     properties: {

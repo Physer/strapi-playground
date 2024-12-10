@@ -15,7 +15,7 @@ module keyVault 'modules/keyVault.bicep' = {
   scope: resourceGroup
   name: 'deployKeyVault'
   params: {
-    secrets: json(secrets)
+    secrets: secrets
   }
 }
 
