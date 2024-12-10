@@ -3,10 +3,20 @@ import { appendHash } from './utilities.bicep'
 targetScope = 'subscription'
 
 param environment string
+@secure()
+param secrets object
 
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-07-01' = {
   name: 'rg-strapi-playground-${environment}'
   location: deployment().location
+}
+
+module keyVault 'modules/keyVault.bicep' = {
+  scope: resourceGroup
+  name: 'deployKeyVault'
+  params: {
+    secrets: secrets
+  }
 }
 
 module containerRegistry 'modules/registry.bicep' = {

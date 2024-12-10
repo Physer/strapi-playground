@@ -18,6 +18,7 @@ jobs:
   deploy_infra:
     name: Deploy infrastructure
     runs-on: ubuntu-latest
+    environment: production
     outputs:
       containerRegistryName: ${{ steps.deployinfra.outputs.containerRegistryName }}
       containerAppEnvironmentName: ${{ steps.deployinfra.outputs.containerAppEnvironmentName }}
@@ -41,7 +42,7 @@ jobs:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           scope: "subscription"
           template: ./infrastructure/cms.bicep
-          parameters: "environment=production"
+          parameters: "environment=production secrets=${{ secrets }}"
           region: ${{ vars.AZURE_REGION }}
 
   push_image_to_acr:
