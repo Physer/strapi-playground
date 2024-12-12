@@ -40,6 +40,7 @@ module cmsContainerApp 'modules/containerApp.bicep' = {
         value: databaseClient
       }
     ]
+    secrets: []
   }
 }
 
