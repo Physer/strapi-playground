@@ -42,7 +42,7 @@ jobs:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           scope: "subscription"
           template: ./infrastructure/cms.bicep
-          parameters: "environment=production"
+          parameters: "environment=production databaseClient=${{ vars.CMS_DATABASE_CLIENT }}"
           region: ${{ vars.AZURE_REGION }}
 
   push_image_to_acr:

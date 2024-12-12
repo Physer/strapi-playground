@@ -11,16 +11,8 @@ param minReplicas int = 0
 param maxReplicas int = 1
 param targetPort int = 80
 
-@secure()
-param appKeys string = '${newGuid()},${newGuid()}'
-@secure()
-param apiTokenSalt string = newGuid()
-@secure()
-param adminJwtSecret string = newGuid()
-@secure()
-param transferTokenSalt string = newGuid()
-@secure()
-param jwtSecret string = newGuid()
+param environmentVariables array
+param secrets array
 
 var location = resourceGroup().location
 
@@ -69,28 +61,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-08-02-preview' = {
             cpu: json(cpu)
             memory: memory
           }
-          env: [
-            {
-              name: 'APP_KEYS'
-              value: appKeys
-            }
-            {
-              name: 'API_TOKEN_SALT'
-              value: apiTokenSalt
-            }
-            {
-              name: 'ADMIN_JWT_SECRET'
-              value: adminJwtSecret
-            }
-            {
-              name: 'TRANSFER_TOKEN_SALT'
-              value: transferTokenSalt
-            }
-            {
-              name: 'JWT_SECRET'
-              value: jwtSecret
-            }
-          ]
+          env: concat(environmentVariables, [])
         }
       ]
       scale: {

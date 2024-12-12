@@ -3,6 +3,7 @@ import { appendHash } from './utilities.bicep'
 targetScope = 'subscription'
 
 param environment string
+param databaseClient string
 
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-07-01' = {
   name: 'rg-strapi-playground-${environment}'
@@ -33,6 +34,12 @@ module cmsContainerApp 'modules/containerApp.bicep' = {
     imageName: 'nginx:latest'
     logAnalyicsWorkspaceName: logAnalyticsWorkspace.outputs.resourceName
     targetPort: 1337
+    environmentVariables: [
+      {
+        name: 'DATABASE_CLIENT'
+        value: databaseClient
+      }
+    ]
   }
 }
 
