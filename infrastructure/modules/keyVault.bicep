@@ -3,7 +3,7 @@ import { appendHash } from '../utilities.bicep'
 param sku string = 'standard'
 
 resource keyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' = {
-  name: appendHash('kv-strapi-playground')
+  name: appendHash('kv-strapi')
   location: resourceGroup().location
   properties: {
     sku: {
