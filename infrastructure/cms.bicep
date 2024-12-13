@@ -5,6 +5,30 @@ targetScope = 'subscription'
 param environment string
 param databaseClient string
 
+var secrets = [
+  {
+    name: 'APP_KEYS'
+  }
+  {
+    name: 'API_TOKEN_SALT'
+  }
+  {
+    name: 'ADMIN_JWT_SECRET'
+  }
+  {
+    name: 'TRANSFER_TOKEN_SALT'
+  }
+  {
+    name: 'JWT_SECRET'
+  }
+  {
+    name: 'DATABASE_USERNAME'
+  }
+  {
+    name: 'DATABASE_PASSWORD'
+  }
+]
+
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-07-01' = {
   name: 'rg-strapi-playground-${environment}'
   location: deployment().location
@@ -23,6 +47,7 @@ module keyVault 'modules/keyVault.bicep' = {
   name: 'deployCmsKeyVault'
   params: {
     keyVaultName: 'kv-cms'
+    secrets: secrets
     accessPolicies: [
       {
         objectId: cmsIdentity.outputs.cmsIdentityPrincipalId
@@ -65,29 +90,7 @@ module cmsContainerApp 'modules/containerApp.bicep' = {
         value: databaseClient
       }
     ]
-    secrets: [
-      {
-        name: 'APP_KEYS'
-      }
-      {
-        name: 'API_TOKEN_SALT'
-      }
-      {
-        name: 'ADMIN_JWT_SECRET'
-      }
-      {
-        name: 'TRANSFER_TOKEN_SALT'
-      }
-      {
-        name: 'JWT_SECRET'
-      }
-      {
-        name: 'DATABASE_USERNAME'
-      }
-      {
-        name: 'DATABASE_PASSWORD'
-      }
-    ]
+    secrets: secrets
   }
 }
 
