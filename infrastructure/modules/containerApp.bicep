@@ -42,8 +42,8 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-08-02-p
 
 var mappedSecrets = [
   for secret in secrets: {
-    name: secret.name
-    secretRef: makeValidIdentifier(secret.name)
+    name: secret
+    secretRef: makeValidIdentifier(secret)
   }
 ]
 resource containerApp 'Microsoft.App/containerApps@2024-08-02-preview' = {
@@ -65,8 +65,8 @@ resource containerApp 'Microsoft.App/containerApps@2024-08-02-preview' = {
       }
       secrets: [
         for secret in secrets: {
-          name: makeValidIdentifier(secret.name)
-          keyVaultUrl: '${keyVault.properties.vaultUri}secrets/${makeValidIdentifier(secret.name)}'
+          name: makeValidIdentifier(secret)
+          keyVaultUrl: '${keyVault.properties.vaultUri}secrets/${makeValidIdentifier(secret)}'
           identity: cmsIdentityPrincipalId
         }
       ]

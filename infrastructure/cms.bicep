@@ -6,27 +6,13 @@ param environment string
 param databaseClient string
 
 var secrets = [
-  {
-    name: 'APP_KEYS'
-  }
-  {
-    name: 'API_TOKEN_SALT'
-  }
-  {
-    name: 'ADMIN_JWT_SECRET'
-  }
-  {
-    name: 'TRANSFER_TOKEN_SALT'
-  }
-  {
-    name: 'JWT_SECRET'
-  }
-  {
-    name: 'DATABASE_USERNAME'
-  }
-  {
-    name: 'DATABASE_PASSWORD'
-  }
+  'APP_KEYS'
+  'API_TOKEN_SALT'
+  'ADMIN_JWT_SECRET'
+  'TRANSFER_TOKEN_SALT'
+  'JWT_SECRET'
+  'DATABASE_USERNAME'
+  'DATABASE_PASSWORD'
 ]
 
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-07-01' = {
