@@ -4,7 +4,7 @@ param cmsIdentityResourceId string
 param cmsIdentityPrincipalId string
 param cmsIdentityTenantId string
 
-resource mySql 'Microsoft.DBforMySQL/flexibleServers@2024-10-01-preview' = {
+resource mySql 'Microsoft.DBforMySQL/flexibleServers@2023-12-30' = {
   name: appendHash('mysql-cms')
   location: resourceGroup().location
   sku: {

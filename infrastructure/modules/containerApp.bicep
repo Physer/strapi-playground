@@ -22,11 +22,11 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2023-09-01' exis
   name: logAnalyicsWorkspaceName
 }
 
-resource keyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' existing = {
+resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
   name: keyVaultName
 }
 
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-08-02-preview' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   location: location
   name: appendHash(containerAppEnvironmentName)
   properties: {
@@ -46,7 +46,7 @@ var mappedSecrets = [
     secretRef: makeValidIdentifier(secret)
   }
 ]
-resource containerApp 'Microsoft.App/containerApps@2024-08-02-preview' = {
+resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   location: location
   name: appendHash(containerAppName)
   identity: {

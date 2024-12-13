@@ -4,7 +4,7 @@ param keyVaultName string
 param sku string = 'standard'
 param cmsIdentityPrincipalId string
 
-resource keyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' = {
+resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
   name: appendHash(keyVaultName)
   location: resourceGroup().location
   properties: {
