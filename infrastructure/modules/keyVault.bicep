@@ -1,9 +1,10 @@
 import { appendHash } from '../utilities.bicep'
 
+param keyVaultName string
 param sku string = 'standard'
 
 resource keyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' = {
-  name: appendHash('kv-strapi')
+  name: appendHash(keyVaultName)
   location: resourceGroup().location
   properties: {
     sku: {
@@ -14,3 +15,5 @@ resource keyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' = {
     accessPolicies: []
   }
 }
+
+output resourceName string = keyVault.name

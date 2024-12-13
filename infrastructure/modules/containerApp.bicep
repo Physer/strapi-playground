@@ -1,4 +1,4 @@
-import { appendHash } from '../utilities.bicep'
+import { appendHash, replaceUnderscoresWithDashes } from '../utilities.bicep'
 
 param containerAppEnvironmentName string
 param containerAppName string
@@ -13,11 +13,16 @@ param targetPort int = 80
 
 param environmentVariables array
 param secrets array
+param keyVaultName string
 
 var location = resourceGroup().location
 
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2023-09-01' existing = {
   name: logAnalyicsWorkspaceName
+}
+
+resource keyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' existing = {
+  name: keyVaultName
 }
 
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-08-02-preview' = {
@@ -34,6 +39,12 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-08-02-p
   }
 }
 
+var mappedSecrets = [
+  for secret in secrets: {
+    name: secret.name
+    secretRef: replaceUnderscoresWithDashes(secret.name)
+  }
+]
 resource containerApp 'Microsoft.App/containerApps@2024-08-02-preview' = {
   location: location
   name: appendHash(containerAppName)
@@ -51,6 +62,12 @@ resource containerApp 'Microsoft.App/containerApps@2024-08-02-preview' = {
           }
         ]
       }
+      secrets: [
+        for secret in secrets: {
+          name: secret.name
+          keyVaultUrl: '${keyVault.properties.vaultUri}secrets/${replaceUnderscoresWithDashes(secret.name)}'
+        }
+      ]
     }
     template: {
       containers: [
@@ -61,7 +78,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-08-02-preview' = {
             cpu: json(cpu)
             memory: memory
           }
-          env: concat(environmentVariables, [])
+          env: concat(environmentVariables, mappedSecrets)
         }
       ]
       scale: {

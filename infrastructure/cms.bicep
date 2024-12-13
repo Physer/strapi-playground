@@ -12,7 +12,10 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-07-01' = {
 
 module keyVault 'modules/keyVault.bicep' = {
   scope: resourceGroup
-  name: 'deployKeyVault'
+  name: 'deployCmsKeyVault'
+  params: {
+    keyVaultName: 'kv-cms'
+  }
 }
 
 module containerRegistry 'modules/registry.bicep' = {
@@ -33,6 +36,7 @@ module cmsContainerApp 'modules/containerApp.bicep' = {
     containerAppName: 'ca-cms'
     imageName: 'nginx:latest'
     logAnalyicsWorkspaceName: logAnalyticsWorkspace.outputs.resourceName
+    keyVaultName: keyVault.outputs.resourceName
     targetPort: 1337
     environmentVariables: [
       {
@@ -40,7 +44,29 @@ module cmsContainerApp 'modules/containerApp.bicep' = {
         value: databaseClient
       }
     ]
-    secrets: []
+    secrets: [
+      {
+        name: 'APP_KEYS'
+      }
+      {
+        name: 'API_TOKEN_SALT'
+      }
+      {
+        name: 'ADMIN_JWT_SECRET'
+      }
+      {
+        name: 'TRANSFER_TOKEN_SALT'
+      }
+      {
+        name: 'JWT_SECRET'
+      }
+      {
+        name: 'DATABASE_USERNAME'
+      }
+      {
+        name: 'DATABASE_PASSWORD'
+      }
+    ]
   }
 }
 
