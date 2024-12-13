@@ -10,3 +10,4 @@ resource cmsIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-3
 output cmsIdentityResourceId string = cmsIdentity.id
 output cmsIdentityPrincipalId string = cmsIdentity.properties.principalId
 output cmsIdentityTenantId string = cmsIdentity.properties.tenantId
+output cmsIdentityName string = cmsIdentity.name

@@ -73,6 +73,7 @@ module mysql 'modules/sql.bicep' = {
     cmsIdentityPrincipalId: cmsIdentity.outputs.cmsIdentityPrincipalId
     cmsIdentityResourceId: cmsIdentity.outputs.cmsIdentityResourceId
     cmsIdentityTenantId: cmsIdentity.outputs.cmsIdentityTenantId
+    cmsIdentityName: cmsIdentity.outputs.cmsIdentityName
   }
 }
 
