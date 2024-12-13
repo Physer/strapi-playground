@@ -7,5 +7,6 @@ resource cmsIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-07-3
   location: resourceGroup().location
 }
 
+output cmsIdentityResourceId string = cmsIdentity.id
 output cmsIdentityPrincipalId string = cmsIdentity.properties.principalId
 output cmsIdentityTenantId string = cmsIdentity.properties.tenantId

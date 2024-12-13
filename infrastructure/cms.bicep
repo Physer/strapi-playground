@@ -69,7 +69,7 @@ module cmsContainerApp 'modules/containerApp.bicep' = {
     logAnalyicsWorkspaceName: logAnalyticsWorkspace.outputs.resourceName
     keyVaultName: keyVault.outputs.resourceName
     targetPort: 1337
-    cmsIdentityPrincipalId: cmsIdentity.outputs.cmsIdentityPrincipalId
+    cmsIdentityResourceId: cmsIdentity.outputs.cmsIdentityResourceId
     environmentVariables: [
       {
         name: 'DATABASE_CLIENT'
