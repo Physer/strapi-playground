@@ -21,14 +21,13 @@ resource mySql 'Microsoft.DBforMySQL/flexibleServers@2023-12-30' = {
   }
 }
 
-// resource mySqlAdmin 'Microsoft.DBforMySQL/flexibleServers/administrators@2023-12-30' = {
-//   parent: mySql
-//   name: 'ActiveDirectory'
-//   properties: {
-//     administratorType: 'ActiveDirectory'
-//     identityResourceId: cmsIdentityResourceId
-//     login: 'mysql-cms-admin'
-//     sid: cmsIdentityPrincipalId
-//     tenantId: cmsIdentityTenantId
-//   }
-// }
+resource mySqlAdmin 'Microsoft.DBforMySQL/flexibleServers/administrators@2023-12-30' = {
+  parent: mySql
+  name: 'ActiveDirectory'
+  properties: {
+    administratorType: 'ActiveDirectory'
+    identityResourceId: cmsIdentityResourceId
+    sid: cmsIdentityPrincipalId
+    tenantId: cmsIdentityTenantId
+  }
+}
