@@ -4,7 +4,7 @@ param cmsIdentityResourceId string
 param cmsIdentityPrincipalId string
 param cmsIdentityTenantId string
 param cmsIdentityName string
-param flexibleMySqlServerLocation string = 'germanynorth'
+param flexibleMySqlServerLocation string = 'swedencentral'
 
 resource mySql 'Microsoft.DBforMySQL/flexibleServers@2023-12-30' = {
   name: appendHash('mysql-cms')
