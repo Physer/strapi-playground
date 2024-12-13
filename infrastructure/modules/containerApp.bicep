@@ -1,4 +1,4 @@
-import { appendHash, replaceUnderscoresWithDashes } from '../utilities.bicep'
+import { appendHash, makeValidIdentifier } from '../utilities.bicep'
 
 param containerAppEnvironmentName string
 param containerAppName string
@@ -43,7 +43,7 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-08-02-p
 var mappedSecrets = [
   for secret in secrets: {
     name: secret.name
-    secretRef: replaceUnderscoresWithDashes(secret.name)
+    secretRef: makeValidIdentifier(secret.name)
   }
 ]
 resource containerApp 'Microsoft.App/containerApps@2024-08-02-preview' = {
@@ -65,8 +65,8 @@ resource containerApp 'Microsoft.App/containerApps@2024-08-02-preview' = {
       }
       secrets: [
         for secret in secrets: {
-          name: replaceUnderscoresWithDashes(secret.name)
-          keyVaultUrl: '${keyVault.properties.vaultUri}secrets/${replaceUnderscoresWithDashes(secret.name)}'
+          name: makeValidIdentifier(secret.name)
+          keyVaultUrl: '${keyVault.properties.vaultUri}secrets/${makeValidIdentifier(secret.name)}'
           identity: cmsIdentityPrincipalId
         }
       ]

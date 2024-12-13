@@ -5,4 +5,4 @@ func appendHash(resourceName string) string => '${resourceName}-${uniqueString(r
 func removeHyphens(stringToReplace string) string => replace(stringToReplace, '-', '')
 
 @export()
-func replaceUnderscoresWithDashes(secret string) string => replace(secret, '_', '-')
+func makeValidIdentifier(secret string) string => toLower(replace(secret, '_', '-'))
