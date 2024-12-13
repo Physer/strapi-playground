@@ -16,6 +16,9 @@ resource mySql 'Microsoft.DBforMySQL/flexibleServers@2023-12-30' = {
   properties: {
     version: '8.0.21'
     administratorLogin: 'mysqladmin'
+    dataEncryption: {
+      type: 'SystemManaged'
+    }
   }
 }
 
