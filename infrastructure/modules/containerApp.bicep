@@ -49,6 +49,12 @@ var mappedSecrets = [
 resource containerApp 'Microsoft.App/containerApps@2024-08-02-preview' = {
   location: location
   name: appendHash(containerAppName)
+  identity: {
+    type: 'UserAssigned'
+    userAssignedIdentities: {
+      '${cmsIdentityResourceId}': {}
+    }
+  }
   properties: {
     managedEnvironmentId: containerAppEnvironment.id
     configuration: {
