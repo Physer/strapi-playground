@@ -2,6 +2,7 @@ import { appendHash } from '../utilities.bicep'
 
 param keyVaultName string
 param sku string = 'standard'
+param accessPolicies array = []
 
 resource keyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' = {
   name: appendHash(keyVaultName)
@@ -12,7 +13,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' = {
       family: 'A'
     }
     tenantId: subscription().tenantId
-    accessPolicies: []
+    accessPolicies: accessPolicies
   }
 }
 

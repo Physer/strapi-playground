@@ -14,6 +14,7 @@ param targetPort int = 80
 param environmentVariables array
 param secrets array
 param keyVaultName string
+param cmsIdentityPrincipalId string
 
 var location = resourceGroup().location
 
@@ -66,6 +67,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-08-02-preview' = {
         for secret in secrets: {
           name: secret.name
           keyVaultUrl: '${keyVault.properties.vaultUri}secrets/${replaceUnderscoresWithDashes(secret.name)}'
+          identity: cmsIdentityPrincipalId
         }
       ]
     }

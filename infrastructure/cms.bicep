@@ -10,11 +10,31 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-07-01' = {
   location: deployment().location
 }
 
+module cmsIdentity 'modules/identity.bicep' = {
+  scope: resourceGroup
+  name: 'deployCmsIdentity'
+  params: {
+    identityName: 'id-cms'
+  }
+}
+
 module keyVault 'modules/keyVault.bicep' = {
   scope: resourceGroup
   name: 'deployCmsKeyVault'
   params: {
     keyVaultName: 'kv-cms'
+    accessPolicies: [
+      {
+        objectId: cmsIdentity.outputs.cmsIdentityPrincipalId
+        permissions: {
+          secrets: [
+            'list'
+            'get'
+          ]
+        }
+        tenantId: cmsIdentity.outputs.cmsIdentityTenantId
+      }
+    ]
   }
 }
 
@@ -38,6 +58,7 @@ module cmsContainerApp 'modules/containerApp.bicep' = {
     logAnalyicsWorkspaceName: logAnalyticsWorkspace.outputs.resourceName
     keyVaultName: keyVault.outputs.resourceName
     targetPort: 1337
+    cmsIdentityPrincipalId: cmsIdentity.outputs.cmsIdentityPrincipalId
     environmentVariables: [
       {
         name: 'DATABASE_CLIENT'
