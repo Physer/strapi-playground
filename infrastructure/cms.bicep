@@ -66,6 +66,16 @@ module cmsContainerApp 'modules/containerApp.bicep' = {
   }
 }
 
+module mysql 'modules/sql.bicep' = {
+  scope: resourceGroup
+  name: 'deployMysql'
+  params: {
+    cmsIdentityPrincipalId: cmsIdentity.outputs.cmsIdentityPrincipalId
+    cmsIdentityResourceId: cmsIdentity.outputs.cmsIdentityResourceId
+    cmsIdentityTenantId: cmsIdentity.outputs.cmsIdentityTenantId
+  }
+}
+
 output containerRegistryName string = containerRegistry.outputs.containerRegistryName
 output containerAppEnvironmentName string = cmsContainerApp.outputs.containerAppEnvironmentName
 output containerAppName string = cmsContainerApp.outputs.containerAppName
