@@ -5,6 +5,8 @@ param cmsIdentityPrincipalId string
 param cmsIdentityTenantId string
 param cmsIdentityName string
 param flexibleMySqlServerLocation string = 'swedencentral'
+@secure()
+param sqlPassword string = newGuid()
 
 resource mySql 'Microsoft.DBforMySQL/flexibleServers@2023-12-30' = {
   name: appendHash('mysql-cms')
@@ -22,6 +24,7 @@ resource mySql 'Microsoft.DBforMySQL/flexibleServers@2023-12-30' = {
   properties: {
     version: '8.0.21'
     administratorLogin: 'mysqladmin'
+    administratorLoginPassword: sqlPassword
   }
 }
 
