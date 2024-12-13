@@ -4,6 +4,8 @@ param cmsIdentityResourceId string
 param cmsIdentityPrincipalId string
 param cmsIdentityTenantId string
 param flexibleMySqlServerLocation string = 'swedencentral'
+@secure()
+param sqlPassword string = newGuid()
 
 resource mySql 'Microsoft.DBforMySQL/flexibleServers@2023-12-30' = {
   name: appendHash('mysql-db-2')
@@ -14,18 +16,19 @@ resource mySql 'Microsoft.DBforMySQL/flexibleServers@2023-12-30' = {
   }
   properties: {
     version: '8.0.21'
-    administratorLoginPassword: 'dummy'
+    administratorLogin: 'mysql-sa'
+    administratorLoginPassword: sqlPassword
   }
 }
 
-resource mySqlAdmin 'Microsoft.DBforMySQL/flexibleServers/administrators@2023-12-30' = {
-  parent: mySql
-  name: 'ActiveDirectory'
-  properties: {
-    administratorType: 'ActiveDirectory'
-    identityResourceId: cmsIdentityResourceId
-    login: 'mysql-cms-admin'
-    sid: cmsIdentityPrincipalId
-    tenantId: cmsIdentityTenantId
-  }
-}
+// resource mySqlAdmin 'Microsoft.DBforMySQL/flexibleServers/administrators@2023-12-30' = {
+//   parent: mySql
+//   name: 'ActiveDirectory'
+//   properties: {
+//     administratorType: 'ActiveDirectory'
+//     identityResourceId: cmsIdentityResourceId
+//     login: 'mysql-cms-admin'
+//     sid: cmsIdentityPrincipalId
+//     tenantId: cmsIdentityTenantId
+//   }
+// }
