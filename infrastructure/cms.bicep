@@ -34,18 +34,7 @@ module keyVault 'modules/keyVault.bicep' = {
   params: {
     keyVaultName: 'kv-cms'
     secrets: secrets
-    accessPolicies: [
-      {
-        objectId: cmsIdentity.outputs.cmsIdentityPrincipalId
-        permissions: {
-          secrets: [
-            'list'
-            'get'
-          ]
-        }
-        tenantId: cmsIdentity.outputs.cmsIdentityTenantId
-      }
-    ]
+    cmsIdentityPrincipalId: cmsIdentity.outputs.cmsIdentityPrincipalId
   }
 }
 

@@ -2,8 +2,8 @@ import { appendHash, makeValidIdentifier } from '../utilities.bicep'
 
 param keyVaultName string
 param sku string = 'standard'
-param accessPolicies array = []
 param secrets array = []
+param cmsIdentityPrincipalId string
 
 resource keyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' = {
   name: appendHash(keyVaultName)
@@ -14,7 +14,9 @@ resource keyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' = {
       family: 'A'
     }
     tenantId: subscription().tenantId
-    accessPolicies: accessPolicies
+    enableRbacAuthorization: true
+    enabledForTemplateDeployment: true
+    enabledForDeployment: true
   }
 }
 
@@ -30,5 +32,16 @@ resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2024-04-01-preview' =
     }
   }
 ]
+
+resource secretsUserRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(cmsIdentityPrincipalId, resourceGroup().id, keyVault.id)
+  properties: {
+    principalId: cmsIdentityPrincipalId
+    roleDefinitionId: subscriptionResourceId(
+      'Microsoft.Authorization/roleDefinitions',
+      '4633458b-17de-408a-b874-0445c86b69e6'
+    )
+  }
+}
 
 output resourceName string = keyVault.name
