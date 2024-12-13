@@ -6,7 +6,7 @@ param cmsIdentityTenantId string
 param flexibleMySqlServerLocation string = 'germanynorth'
 
 resource mySql 'Microsoft.DBforMySQL/flexibleServers@2023-12-30' = {
-  name: appendHash('mysql-cms')
+  name: appendHash('mysql-cms-db')
   location: flexibleMySqlServerLocation
   sku: {
     name: 'Standard_B1ms'
