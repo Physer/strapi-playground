@@ -65,7 +65,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-08-02-preview' = {
       }
       secrets: [
         for secret in secrets: {
-          name: secret.name
+          name: replaceUnderscoresWithDashes(secret.name)
           keyVaultUrl: '${keyVault.properties.vaultUri}secrets/${replaceUnderscoresWithDashes(secret.name)}'
           identity: cmsIdentityPrincipalId
         }
