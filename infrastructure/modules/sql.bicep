@@ -8,8 +8,8 @@ resource mySql 'Microsoft.DBforMySQL/flexibleServers@2023-12-30' = {
   name: appendHash('mysql-cms')
   location: resourceGroup().location
   sku: {
-    name: 'GP_Gen5_2'
-    tier: 'GeneralPurpose'
+    name: 'Standard_B1ms'
+    tier: 'Burstable'
   }
   properties: {
     version: '8.0.21'
