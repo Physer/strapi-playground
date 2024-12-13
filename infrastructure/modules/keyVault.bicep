@@ -2,7 +2,6 @@ import { appendHash, makeValidIdentifier } from '../utilities.bicep'
 
 param keyVaultName string
 param sku string = 'standard'
-param secrets array = []
 param cmsIdentityPrincipalId string
 
 resource keyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' = {
@@ -19,19 +18,6 @@ resource keyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' = {
     enabledForDeployment: true
   }
 }
-
-resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2024-04-01-preview' = [
-  for secret in secrets: {
-    parent: keyVault
-    name: makeValidIdentifier(secret)
-    properties: {
-      value: '-'
-      attributes: {
-        enabled: true
-      }
-    }
-  }
-]
 
 resource secretsUserRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(cmsIdentityPrincipalId, resourceGroup().id, keyVault.id)
