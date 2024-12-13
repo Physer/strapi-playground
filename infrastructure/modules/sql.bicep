@@ -3,10 +3,11 @@ import { appendHash } from '../utilities.bicep'
 param cmsIdentityResourceId string
 param cmsIdentityPrincipalId string
 param cmsIdentityTenantId string
+param flexibleMySqlServerLocation string = 'germanynorth'
 
 resource mySql 'Microsoft.DBforMySQL/flexibleServers@2023-12-30' = {
   name: appendHash('mysql-cms')
-  location: resourceGroup().location
+  location: flexibleMySqlServerLocation
   sku: {
     name: 'Standard_B1ms'
     tier: 'Burstable'
