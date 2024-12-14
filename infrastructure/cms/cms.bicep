@@ -1,4 +1,4 @@
-import { appendHash } from './utilities.bicep'
+import { appendHash } from '../utilities.bicep'
 
 targetScope = 'subscription'
 
@@ -10,7 +10,7 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-07-01' = {
   location: deployment().location
 }
 
-module cmsIdentity 'modules/identity.bicep' = {
+module cmsIdentity '../modules/identity.bicep' = {
   scope: resourceGroup
   name: 'deployCmsIdentity'
   params: {
@@ -18,7 +18,7 @@ module cmsIdentity 'modules/identity.bicep' = {
   }
 }
 
-module keyVault 'modules/keyVault.bicep' = {
+module keyVault '../modules/keyVault.bicep' = {
   scope: resourceGroup
   name: 'deployCmsKeyVault'
   params: {
@@ -27,17 +27,17 @@ module keyVault 'modules/keyVault.bicep' = {
   }
 }
 
-module containerRegistry 'modules/registry.bicep' = {
+module containerRegistry '../modules/registry.bicep' = {
   scope: resourceGroup
   name: 'deployContainerRegistry'
 }
 
-module logAnalyticsWorkspace 'modules/logAnalytics.bicep' = {
+module logAnalyticsWorkspace '../modules/logAnalytics.bicep' = {
   scope: resourceGroup
   name: 'deployLogAnalytics'
 }
 
-module cmsContainerApp 'modules/containerApp.bicep' = {
+module cmsContainerApp '../modules/containerApp.bicep' = {
   scope: resourceGroup
   name: 'deployCmsContainer'
   params: {
@@ -66,7 +66,7 @@ module cmsContainerApp 'modules/containerApp.bicep' = {
   }
 }
 
-module mysql 'modules/sql.bicep' = {
+module mysql '../modules/sql.bicep' = {
   scope: resourceGroup
   name: 'deployMysql'
   params: {

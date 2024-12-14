@@ -41,7 +41,7 @@ jobs:
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           scope: "subscription"
-          template: ./infrastructure/cms.bicep
+          template: ./infrastructure/cms/cms.bicep
           parameters: "environment=production databaseClient=${{ vars.CMS_DATABASE_CLIENT }}"
           region: ${{ vars.AZURE_REGION }}
 
@@ -69,6 +69,6 @@ jobs:
           containerAppEnvironment: ${{ needs.deploy_infra.outputs.containerAppEnvironmentName }}
           containerAppName: ${{ needs.deploy_infra.outputs.containerAppName }}
           resourceGroup: ${{ needs.deploy_infra.outputs.resourceGroupName }}
-          dockerfilePath: infrastructure/Dockerfile.cms
+          dockerfilePath: infrastructure/cms/Dockerfile.cms
           imageToBuild: ${{ needs.deploy_infra.outputs.containerRegistryName }}.azurecr.io/strapi-playground/cms:latest
           location: ${{ needs.deploy_infra.outputs.resourceLocation }}

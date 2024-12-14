@@ -3,7 +3,7 @@ services:
     container_name: cms
     build:
       context: .
-      dockerfile: infrastructure/Dockerfile.cms
+      dockerfile: infrastructure/cms/Dockerfile.cms
     env_file:
       - cms/.env
     environment:
