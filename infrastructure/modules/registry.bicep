@@ -10,4 +10,4 @@ resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' =
   }
 }
 
-output containerRegistryName string = containerRegistry.name
+output registryName string = containerRegistry.name
