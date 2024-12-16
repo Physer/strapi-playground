@@ -34,17 +34,6 @@ module logAnalyticsWorkspace '../modules/logAnalytics.bicep' = {
   name: 'deployLogAnalytics'
 }
 
-module mysql '../modules/sql.bicep' = {
-  scope: resourceGroup
-  name: 'deployMysql'
-  params: {
-    cmsIdentityPrincipalId: cmsIdentity.outputs.principalId
-    cmsIdentityResourceId: cmsIdentity.outputs.resourceId
-    cmsIdentityTenantId: cmsIdentity.outputs.tenantId
-    cmsIdentityName: cmsIdentity.outputs.resourceName
-  }
-}
-
 output resourceGroupName string = resourceGroup.name
 output resourceLocation string = resourceGroup.location
 output containerRegistryName string = containerRegistry.outputs.registryName

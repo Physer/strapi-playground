@@ -5,6 +5,17 @@ param logAnalyticsWorkspaceName string
 param keyVaultName string
 param identityResourceId string
 
+resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
+  name: keyVaultName
+}
+
+module mysql '../modules/sql.bicep' = {
+  name: 'deployMysql'
+  params: {
+    sqlPassword: keyVault.getSecret('mysql-admin-password')
+  }
+}
+
 module cmsContainerApp '../modules/containerApp.bicep' = {
   name: 'deployCmsContainer'
   params: {
