@@ -4,15 +4,20 @@ param databaseClient string
 param logAnalyticsWorkspaceName string
 param keyVaultName string
 param identityResourceId string
+param cmsImageName string
+param cmsInitImageName string = ''
+
+var strapiSqlUser = 'strapi-user'
+var mySqlAdminPasswordKeyVaultReference = 'mysql-admin-password'
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
   name: keyVaultName
 }
 
-module mysql '../modules/sql.bicep' = {
+module mySql '../modules/sql.bicep' = {
   name: 'deployMysql'
   params: {
-    sqlPassword: keyVault.getSecret('mysql-admin-password')
+    sqlPassword: keyVault.getSecret(mySqlAdminPasswordKeyVaultReference)
   }
 }
 
@@ -21,7 +26,8 @@ module cmsContainerApp '../modules/containerApp.bicep' = {
   params: {
     containerAppEnvironmentName: 'cae-cms'
     containerAppName: 'ca-cms'
-    imageName: 'nginx:latest'
+    imageName: cmsImageName
+    initImageName: cmsInitImageName
     logAnalyicsWorkspaceName: logAnalyticsWorkspaceName
     keyVaultName: keyVaultName
     targetPort: 1337
@@ -31,15 +37,68 @@ module cmsContainerApp '../modules/containerApp.bicep' = {
         name: 'DATABASE_CLIENT'
         value: databaseClient
       }
+      {
+        name: 'DaTABASE_NAME'
+        value: mySql.outputs.databaseName
+      }
+      {
+        name: 'SQL_ROOT_USER'
+        value: 'root'
+      }
+      {
+        name: 'SQL_HOST'
+        value: mySql.outputs.hostName
+      }
+      {
+        name: 'DATABASE_USERNAME'
+        value: strapiSqlUser
+      }
+      {
+        name: 'SQL_CMS_USER'
+        value: strapiSqlUser
+      }
     ]
     secrets: [
-      'APP_KEYS'
-      'API_TOKEN_SALT'
-      'ADMIN_JWT_SECRET'
-      'TRANSFER_TOKEN_SALT'
-      'JWT_SECRET'
-      'DATABASE_USERNAME'
-      'DATABASE_PASSWORD'
+      {
+        appValue: 'APP_KEYS'
+        secretName: 'app-keys'
+        fromKeyVault: true
+      }
+      {
+        appValue: 'API_TOKEN_SALT'
+        secretName: 'api-token-salt'
+        fromKeyVault: true
+      }
+      {
+        appValue: 'ADMIN_JWT_SECRET'
+        secretName: 'admin-jwt-secret'
+        fromKeyVault: true
+      }
+      {
+        appValue: 'TRANSFER_TOKEN_SALT'
+        secretName: 'transfer-token-salt'
+        fromKeyVault: true
+      }
+      {
+        appValue: 'JWT_SECRET'
+        secretName: 'jwt-secret'
+        fromKeyVault: true
+      }
+      {
+        appValue: 'DATABASE_PASSWORD'
+        secretName: 'database-password'
+        fromKeyVault: true
+      }
+      {
+        appValue: 'SQL_ROOT_PASSWORD'
+        secretName: mySqlAdminPasswordKeyVaultReference
+        fromKeyVault: true
+      }
+      {
+        appValue: 'SQL_CMS_PASSWORD'
+        secretName: 'sql-cms-password'
+        fromKeyVault: true
+      }
     ]
   }
 }

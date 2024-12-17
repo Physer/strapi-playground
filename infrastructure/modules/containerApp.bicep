@@ -3,6 +3,7 @@ import { appendHash, makeValidIdentifier } from '../utilities.bicep'
 param containerAppEnvironmentName string
 param containerAppName string
 param imageName string
+param initImageName string
 param logAnalyicsWorkspaceName string
 
 param cpu string = '.25'
@@ -12,7 +13,7 @@ param maxReplicas int = 1
 param targetPort int = 80
 
 param environmentVariables array
-param secrets array
+param secrets array = []
 param keyVaultName string
 param cmsIdentityResourceId string
 
@@ -42,8 +43,8 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' 
 
 var mappedSecrets = [
   for secret in secrets: {
-    name: secret
-    secretRef: makeValidIdentifier(secret)
+    name: secret.appValue
+    secretRef: secret.secretName
   }
 ]
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -71,9 +72,10 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
       }
       secrets: [
         for secret in secrets: {
-          name: makeValidIdentifier(secret)
-          keyVaultUrl: '${keyVault.properties.vaultUri}secrets/${makeValidIdentifier(secret)}'
-          identity: cmsIdentityResourceId
+          name: secret.secretName
+          keyVaultUrl: secret.fromKeyVault ? '${keyVault.properties.vaultUri}secrets/${secret.secretName}' : null
+          identity: secret.fromKeyVault ? cmsIdentityResourceId : null
+          value: (!empty(secret.secretValue) && !secret.fromKeyVault) ? secret.secretValue : null
         }
       ]
     }
@@ -89,6 +91,19 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
           env: concat(environmentVariables, mappedSecrets)
         }
       ]
+      initContainers: !empty(initImageName)
+        ? [
+            {
+              name: appendHash('${containerAppName}-init')
+              image: initImageName
+              resources: {
+                cpu: json(cpu)
+                memory: memory
+              }
+              env: concat(environmentVariables, secrets)
+            }
+          ]
+        : []
       scale: {
         minReplicas: minReplicas
         maxReplicas: maxReplicas

@@ -19,3 +19,6 @@ resource mySql 'Microsoft.DBforMySQL/flexibleServers@2023-12-30' = {
     administratorLoginPassword: sqlPassword
   }
 }
+
+output databaseName string = mySql.name
+output hostName string = mySql.properties.fullyQualifiedDomainName
