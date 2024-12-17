@@ -1,6 +1,7 @@
 import { appendHash } from '../utilities.bicep'
 
 param databaseClient string
+param databaseName string
 param logAnalyticsWorkspaceName string
 param keyVaultName string
 param registryName string
@@ -27,6 +28,7 @@ resource cmsIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-3
 module mySql '../modules/sql.bicep' = {
   name: 'deployMysql'
   params: {
+    databaseName: databaseName
     sqlPassword: keyVault.getSecret(mySqlAdminPasswordKeyVaultReference)
   }
 }

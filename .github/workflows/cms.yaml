@@ -108,4 +108,5 @@ jobs:
             identityName=${{ needs.deploy_infra.outputs.identityName }}
             cmsImageName=${{ needs.deploy_infra.outputs.containerRegistryLoginServer }}/cms:latest
             cmsInitImageName=${{ needs.deploy_infra.outputs.containerRegistryLoginServer }}/cms/init:latest
+            databaseName=${{ vars.CMS_DATABASE_NAME }}
           region: ${{ vars.AZURE_REGION }}

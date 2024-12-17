@@ -5,6 +5,7 @@ param skuTier string = 'Burstable'
 param flexibleMySqlServerLocation string = 'swedencentral'
 @secure()
 param sqlPassword string
+param databaseName string
 
 resource mySql 'Microsoft.DBforMySQL/flexibleServers@2023-12-30' = {
   name: appendHash('mysql-cms')
@@ -18,6 +19,11 @@ resource mySql 'Microsoft.DBforMySQL/flexibleServers@2023-12-30' = {
     administratorLogin: 'mysqladmin'
     administratorLoginPassword: sqlPassword
   }
+}
+
+resource mySqlDatabase 'Microsoft.DBforMySQL/flexibleServers/databases@2023-12-30' = {
+  parent: mySql
+  name: databaseName
 }
 
 resource allowAzureServicesToMySql 'Microsoft.DBforMySQL/flexibleServers/firewallRules@2023-12-30' = {
