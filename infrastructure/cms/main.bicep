@@ -4,7 +4,7 @@ param databaseClient string
 param logAnalyticsWorkspaceName string
 param keyVaultName string
 param registryName string
-param identityResourceId string
+param identityName string
 param cmsImageName string
 param cmsInitImageName string = ''
 
@@ -18,6 +18,10 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
 
 resource registry 'Microsoft.ContainerRegistry/registries@2023-07-01' existing = {
   name: registryName
+}
+
+resource cmsIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' existing = {
+  name: identityName
 }
 
 module mySql '../modules/sql.bicep' = {
@@ -36,7 +40,7 @@ module cmsContainerApp '../modules/containerApp.bicep' = {
     initImageName: cmsInitImageName
     logAnalyicsWorkspaceName: logAnalyticsWorkspaceName
     targetPort: 1337
-    cmsIdentityResourceId: identityResourceId
+    cmsIdentityResourceId: cmsIdentity.id
     keyVaultUri: keyVault.properties.vaultUri
     registryLoginServer: registry.properties.loginServer
     environmentVariables: [

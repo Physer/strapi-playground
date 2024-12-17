@@ -26,7 +26,7 @@ jobs:
       resourceLocation: ${{ steps.deployinfra.outputs.resourceLocation }}
       logAnalyticsWorkspaceName: ${{ steps.deployinfra.outputs.logAnalyticsWorkspaceName }}
       keyVaultName: ${{ steps.deployinfra.outputs.keyVaultName }}
-      identityResourceId: ${{ steps.deployinfra.outputs.identityResourceId }}
+      identityName: ${{ steps.deployinfra.outputs.identityName }}
     steps:
       - uses: actions/checkout@v4
 
@@ -105,7 +105,7 @@ jobs:
             logAnalyticsWorkspaceName=${{ needs.deploy_infra.outputs.logAnalyticsWorkspaceName }}
             keyVaultName=${{ needs.deploy_infra.outputs.keyVaultName }}
             registryName=${{ needs.deploy_infra.outputs.containerRegistryName }}
-            identityResourceId=${{ needs.deploy_infra.outputs.identityResourceId }}
+            identityName=${{ needs.deploy_infra.outputs.identityName }}
             cmsImageName=${{ needs.deploy_infra.outputs.containerRegistryLoginServer }}/cms:latest
             cmsInitImageName=${{ needs.deploy_infra.outputs.containerRegistryLoginServer }}/cms/init:latest
           region: ${{ vars.AZURE_REGION }}
