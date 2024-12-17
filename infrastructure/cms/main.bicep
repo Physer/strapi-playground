@@ -9,6 +9,7 @@ param cmsInitImageName string = ''
 
 var strapiSqlUser = 'strapi-user'
 var mySqlAdminPasswordKeyVaultReference = 'mysql-admin-password'
+var cmsSqlPasswordKeyVaultReference = 'database-password'
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
   name: keyVaultName
@@ -86,7 +87,7 @@ module cmsContainerApp '../modules/containerApp.bicep' = {
       }
       {
         appValue: 'DATABASE_PASSWORD'
-        secretName: 'database-password'
+        secretName: cmsSqlPasswordKeyVaultReference
         fromKeyVault: true
       }
       {
@@ -96,7 +97,7 @@ module cmsContainerApp '../modules/containerApp.bicep' = {
       }
       {
         appValue: 'SQL_CMS_PASSWORD'
-        secretName: 'sql-cms-password'
+        secretName: cmsSqlPasswordKeyVaultReference
         fromKeyVault: true
       }
     ]
