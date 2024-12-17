@@ -82,7 +82,7 @@ jobs:
     name: Deploy CMS applications
     runs-on: ubuntu-latest
     environment: production
-    needs: [deploy_infra]
+    needs: [deploy_infra, push_images_to_acr]
     steps:
       - uses: actions/checkout@v4
 
