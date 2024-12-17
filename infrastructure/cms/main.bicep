@@ -3,6 +3,7 @@ import { appendHash } from '../utilities.bicep'
 param databaseClient string
 param logAnalyticsWorkspaceName string
 param keyVaultName string
+param registryName string
 param identityResourceId string
 param cmsImageName string
 param cmsInitImageName string = ''
@@ -13,6 +14,10 @@ var cmsSqlPasswordKeyVaultReference = 'database-password'
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
   name: keyVaultName
+}
+
+resource registry 'Microsoft.ContainerRegistry/registries@2023-07-01' existing = {
+  name: registryName
 }
 
 module mySql '../modules/sql.bicep' = {
@@ -30,9 +35,10 @@ module cmsContainerApp '../modules/containerApp.bicep' = {
     imageName: cmsImageName
     initImageName: cmsInitImageName
     logAnalyicsWorkspaceName: logAnalyticsWorkspaceName
-    keyVaultName: keyVaultName
     targetPort: 1337
     cmsIdentityResourceId: identityResourceId
+    keyVaultUri: keyVault.properties.vaultUri
+    registryLoginServer: registry.properties.loginServer
     environmentVariables: [
       {
         name: 'DATABASE_CLIENT'

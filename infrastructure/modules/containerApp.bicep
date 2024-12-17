@@ -5,6 +5,9 @@ param containerAppName string
 param imageName string
 param initImageName string
 param logAnalyicsWorkspaceName string
+param registryLoginServer string
+param keyVaultUri string
+param cmsIdentityResourceId string
 
 param cpu string = '.25'
 param memory string = '0.5Gi'
@@ -14,17 +17,11 @@ param targetPort int = 80
 
 param environmentVariables array
 param secrets array = []
-param keyVaultName string
-param cmsIdentityResourceId string
 
 var location = resourceGroup().location
 
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2023-09-01' existing = {
   name: logAnalyicsWorkspaceName
-}
-
-resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
-  name: keyVaultName
 }
 
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
@@ -70,10 +67,16 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
           }
         ]
       }
+      registries: [
+        {
+          identity: cmsIdentityResourceId
+          server: registryLoginServer
+        }
+      ]
       secrets: [
         for secret in secrets: {
           name: secret.secretName
-          keyVaultUrl: secret.fromKeyVault ? '${keyVault.properties.vaultUri}secrets/${secret.secretName}' : null
+          keyVaultUrl: secret.fromKeyVault ? '${keyVaultUri}secrets/${secret.secretName}' : null
           identity: secret.fromKeyVault ? cmsIdentityResourceId : null
           value: !secret.fromKeyVault ? secret.secretValue : null
         }
