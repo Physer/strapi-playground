@@ -1,4 +1,26 @@
 services:
+  database:
+    container_name: database
+    image: mysql:latest
+    env_file:
+      - cms/.env
+    volumes:
+      - cms-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    restart: always
+
+  database-init:
+    container_name: database-init
+    build:
+      context: .
+      dockerfile: infrastructure/cms/Dockerfile.init
+    env_file:
+      - cms/.env
+    restart: on-failure
+    depends_on:
+      - database
+
   strapi:
     container_name: cms
     build:
@@ -13,16 +35,7 @@ services:
       - 1337
     restart: always
     depends_on:
-      - database
-
-  database:
-    container_name: database
-    image: mysql:latest
-    env_file:
-      - cms/.env
-    volumes:
-      - cms-data:/var/lib/mysql
-    restart: always
+      - database-init
 
 volumes:
   cms-data:
