@@ -103,7 +103,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
                 cpu: json(cpu)
                 memory: memory
               }
-              env: concat(environmentVariables, secrets)
+              env: concat(environmentVariables, mappedSecrets)
             }
           ]
         : []
