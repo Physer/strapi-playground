@@ -49,7 +49,7 @@ module cmsContainerApp '../modules/containerApp.bicep' = {
         value: databaseClient
       }
       {
-        name: 'DaTABASE_NAME'
+        name: 'DATABASE_NAME'
         value: mySql.outputs.databaseName
       }
       {
