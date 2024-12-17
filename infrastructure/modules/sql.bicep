@@ -36,5 +36,4 @@ resource allowAzureServicesToMySql 'Microsoft.DBforMySQL/flexibleServers/firewal
 }
 
 output sqlAdminUser string = mySql.properties.administratorLogin
-output databaseName string = mySql.name
 output hostName string = mySql.properties.fullyQualifiedDomainName

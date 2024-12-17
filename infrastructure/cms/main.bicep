@@ -51,8 +51,16 @@ module cmsContainerApp '../modules/containerApp.bicep' = {
         value: databaseClient
       }
       {
+        name: 'DATABASE_HOST'
+        value: mySql.outputs.hostName
+      }
+      {
         name: 'DATABASE_NAME'
-        value: mySql.outputs.databaseName
+        value: databaseName
+      }
+      {
+        name: 'DATABASE_USERNAME'
+        value: strapiSqlUser
       }
       {
         name: 'SQL_ROOT_USER'
@@ -63,12 +71,12 @@ module cmsContainerApp '../modules/containerApp.bicep' = {
         value: mySql.outputs.hostName
       }
       {
-        name: 'DATABASE_USERNAME'
+        name: 'SQL_CMS_USER'
         value: strapiSqlUser
       }
       {
-        name: 'SQL_CMS_USER'
-        value: strapiSqlUser
+        name: 'SQL_DATABASE_NAME'
+        value: databaseName
       }
     ]
     secrets: [
