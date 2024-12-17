@@ -35,5 +35,15 @@ resource allowAzureServicesToMySql 'Microsoft.DBforMySQL/flexibleServers/firewal
   }
 }
 
+resource disableSslMySql 'Microsoft.DBforMySQL/flexibleServers/configurations@2023-12-30' = {
+  parent: mySql
+  name: 'require_secure_transport'
+  properties: {
+    value: 'OFF'
+    currentValue: 'OFF'
+    source: 'user-override'
+  }
+}
+
 output sqlAdminUser string = mySql.properties.administratorLogin
 output hostName string = mySql.properties.fullyQualifiedDomainName
