@@ -20,5 +20,14 @@ resource mySql 'Microsoft.DBforMySQL/flexibleServers@2023-12-30' = {
   }
 }
 
+resource allowAzureServicesToMySql 'Microsoft.DBforMySQL/flexibleServers/firewallRules@2023-12-30' = {
+  parent: mySql
+  name: 'AllowAllAzureServicesAndResourcesWithinAzureIps'
+  properties: {
+    endIpAddress: '0.0.0.0'
+    startIpAddress: '0.0.0.0'
+  }
+}
+
 output databaseName string = mySql.name
 output hostName string = mySql.properties.fullyQualifiedDomainName
