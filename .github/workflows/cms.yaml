@@ -21,11 +21,11 @@ jobs:
     environment: production
     outputs:
       containerRegistryName: ${{ steps.deployinfra.outputs.containerRegistryName }}
+      containerRegistryLoginServer: ${{ steps.deployinfra.outputs.containerRegistryLoginServer }}
       resourceGroupName: ${{ steps.deployinfra.outputs.resourceGroupName }}
       resourceLocation: ${{ steps.deployinfra.outputs.resourceLocation }}
       logAnalyticsWorkspaceName: ${{ steps.deployinfra.outputs.logAnalyticsWorkspaceName }}
       keyVaultName: ${{ steps.deployinfra.outputs.keyVaultName }}
-      registryName: ${{ steps.deployinfra.outputs.registryName }}
       identityResourceId: ${{ steps.deployinfra.outputs.identityResourceId }}
     steps:
       - uses: actions/checkout@v4
@@ -64,19 +64,19 @@ jobs:
       - name: Login to the container registry
         uses: azure/docker-login@v2
         with:
-          login-server: ${{ needs.deploy_infra.outputs.containerRegistryName }}
+          login-server: ${{ needs.deploy_infra.outputs.containerRegistryLoginServer }}
           username: ${{ secrets.AZURE_CLIENT_ID }}
           password: ${{ secrets.AZURE_CLIENT_SECRET }}
 
       - name: Build and push CMS image
         run: |
-          docker build . -t ${{ needs.deploy_infra.outputs.containerRegistryName }}/cms:latest -f ./infrastructure/cms/Dockerfile.cms
-          docker push ${{ needs.deploy_infra.outputs.containerRegistryName }}/cms:latest
+          docker build . -t ${{ needs.deploy_infra.outputs.containerRegistryLoginServer }}/cms:latest -f ./infrastructure/cms/Dockerfile.cms
+          docker push ${{ needs.deploy_infra.outputs.containerRegistryLoginServer }}/cms:latest
 
       - name: Build and push Create SQL User image
         run: |
-          docker build . -t ${{ needs.deploy_infra.outputs.containerRegistryName }}/cms/init:latest -f ./infrastructure/cms/Dockerfile.init
-          docker push ${{ needs.deploy_infra.outputs.containerRegistryName }}/cms/init:latest
+          docker build . -t ${{ needs.deploy_infra.outputs.containerRegistryLoginServer }}/cms/init:latest -f ./infrastructure/cms/Dockerfile.init
+          docker push ${{ needs.deploy_infra.outputs.containerRegistryLoginServer }}/cms/init:latest
 
   deploy_cms:
     name: Deploy CMS applications
@@ -104,8 +104,8 @@ jobs:
             databaseClient=${{ vars.CMS_DATABASE_CLIENT }}
             logAnalyticsWorkspaceName=${{ needs.deploy_infra.outputs.logAnalyticsWorkspaceName }}
             keyVaultName=${{ needs.deploy_infra.outputs.keyVaultName }}
-            registryName=${{ needs.deploy_infra.outputs.registryName }}
+            registryName=${{ needs.deploy_infra.outputs.containerRegistryName }}
             identityResourceId=${{ needs.deploy_infra.outputs.identityResourceId }}
-            cmsImageName=${{ needs.deploy_infra.outputs.containerRegistryName }}/cms:latest
-            cmsInitImageName=${{ needs.deploy_infra.outputs.containerRegistryName }}/cms/init:latest
+            cmsImageName=${{ needs.deploy_infra.outputs.containerRegistryLoginServer }}/cms:latest
+            cmsInitImageName=${{ needs.deploy_infra.outputs.containerRegistryLoginServer }}/cms/init:latest
           region: ${{ vars.AZURE_REGION }}

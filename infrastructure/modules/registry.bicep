@@ -20,3 +20,4 @@ resource acrPushRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-
 }
 
 output registryName string = containerRegistry.name
+output registryLoginServer string = containerRegistry.properties.loginServer

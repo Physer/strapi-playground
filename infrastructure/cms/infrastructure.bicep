@@ -40,6 +40,7 @@ module logAnalyticsWorkspace '../modules/logAnalytics.bicep' = {
 output resourceGroupName string = resourceGroup.name
 output resourceLocation string = resourceGroup.location
 output containerRegistryName string = containerRegistry.outputs.registryName
+output containerRegistryLoginServer string = containerRegistry.outputs.registryLoginServer
 output logAnalyticsWorkspaceName string = logAnalyticsWorkspace.outputs.resourceName
 output keyVaultName string = keyVault.outputs.resourceName
 output identityResourceId string = cmsIdentity.outputs.resourceId
