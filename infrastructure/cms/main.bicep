@@ -56,7 +56,7 @@ module cmsContainerApp '../modules/containerApp.bicep' = {
       }
       {
         name: 'SQL_ROOT_USER'
-        value: 'root'
+        value: mySql.outputs.sqlAdminUser
       }
       {
         name: 'SQL_HOST'
