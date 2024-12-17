@@ -75,7 +75,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
           name: secret.secretName
           keyVaultUrl: secret.fromKeyVault ? '${keyVault.properties.vaultUri}secrets/${secret.secretName}' : null
           identity: secret.fromKeyVault ? cmsIdentityResourceId : null
-          value: (!empty(secret.secretValue) && !secret.fromKeyVault) ? secret.secretValue : null
+          value: !secret.fromKeyVault ? secret.secretValue : null
         }
       ]
     }
