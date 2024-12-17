@@ -56,6 +56,7 @@ jobs:
             databaseClient=${{ vars.CMS_DATABASE_CLIENT }} 
             logAnalyticsWorkspaceName=${{ steps.deployinfra.outputs.logAnalyticsWorkspaceName }}
             keyVaultName=${{ steps.deployinfra.outputs.keyVaultName }}
+            registryName=${{ steps.deployinfra.outputs.containerRegistryName }}
             identityResourceId=${{ steps.deployinfra.outputs.identityResourceId }}
             cmsImageName=${{ steps.deployinfra.outputs.containerRegistryName }}.azurecr.io/strapi-playground/cms:latest
           region: ${{ vars.AZURE_REGION }}
