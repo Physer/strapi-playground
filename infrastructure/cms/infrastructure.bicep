@@ -27,6 +27,9 @@ module keyVault '../modules/keyVault.bicep' = {
 module containerRegistry '../modules/registry.bicep' = {
   scope: resourceGroup
   name: 'deployContainerRegistry'
+  params: {
+    cmsIdentityPrincipalId: cmsIdentity.outputs.principalId
+  }
 }
 
 module logAnalyticsWorkspace '../modules/logAnalytics.bicep' = {
