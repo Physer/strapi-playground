@@ -25,8 +25,8 @@ resource cmsIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-3
   name: identityName
 }
 
-module mySql '../modules/sql.bicep' = {
-  name: 'deployMysql'
+module postgres '../modules/postgres.bicep' = {
+  name: 'deployPostgres'
   params: {
     databaseName: databaseName
     sqlPassword: keyVault.getSecret(mySqlAdminPasswordKeyVaultReference)
@@ -52,7 +52,7 @@ module cmsContainerApp '../modules/containerApp.bicep' = {
       }
       {
         name: 'DATABASE_HOST'
-        value: mySql.outputs.hostName
+        value: postgres.outputs.hostName
       }
       {
         name: 'DATABASE_NAME'
@@ -64,11 +64,11 @@ module cmsContainerApp '../modules/containerApp.bicep' = {
       }
       {
         name: 'SQL_ROOT_USER'
-        value: mySql.outputs.sqlAdminUser
+        value: postgres.outputs.sqlAdminUser
       }
       {
         name: 'SQL_HOST'
-        value: mySql.outputs.hostName
+        value: postgres.outputs.hostName
       }
       {
         name: 'SQL_CMS_USER'

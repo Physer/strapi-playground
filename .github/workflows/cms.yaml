@@ -18,7 +18,7 @@ jobs:
   deploy_infra:
     name: Deploy infrastructure
     runs-on: ubuntu-latest
-    environment: production
+    environment: postgres
     outputs:
       containerRegistryName: ${{ steps.deployinfra.outputs.containerRegistryName }}
       containerRegistryLoginServer: ${{ steps.deployinfra.outputs.containerRegistryLoginServer }}
@@ -44,7 +44,7 @@ jobs:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           scope: "subscription"
           template: ./infrastructure/cms/infrastructure.bicep
-          parameters: "environment=production"
+          parameters: "environment=postgres"
           region: ${{ vars.AZURE_REGION }}
 
   push_images_to_acr:
@@ -81,7 +81,7 @@ jobs:
   deploy_cms:
     name: Deploy CMS applications
     runs-on: ubuntu-latest
-    environment: production
+    environment: postgres
     needs: [deploy_infra, push_images_to_acr]
     steps:
       - uses: actions/checkout@v4
