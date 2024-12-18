@@ -40,6 +40,17 @@ export interface CarouselCarouselText extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentBanner extends Struct.ComponentSchema {
+  collectionName: 'components_content_banners';
+  info: {
+    displayName: 'Banner';
+    icon: 'chartBubble';
+  };
+  attributes: {
+    Title: Schema.Attribute.String;
+  };
+}
+
 export interface ContentHero extends Struct.ComponentSchema {
   collectionName: 'components_content_heroes';
   info: {
@@ -71,6 +82,7 @@ declare module '@strapi/strapi' {
       'carousel.carousel': CarouselCarousel;
       'carousel.carousel-item': CarouselCarouselItem;
       'carousel.carousel-text': CarouselCarouselText;
+      'content.banner': ContentBanner;
       'content.hero': ContentHero;
       'navigation.navigation-item': NavigationNavigationItem;
     }

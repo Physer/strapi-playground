@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "temp2s",
+  "info": {
+    "singularName": "temp2",
+    "pluralName": "temp2s",
+    "displayName": "Temp2"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Temp": {
+      "type": "string"
+    }
+  }
+}

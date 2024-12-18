@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_content_banners",
+  "info": {
+    "displayName": "Banner",
+    "icon": "chartBubble"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    }
+  }
+}

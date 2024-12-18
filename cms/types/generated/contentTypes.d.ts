@@ -498,6 +498,56 @@ export interface ApiNavigationBarNavigationBar
   };
 }
 
+export interface ApiTemp1Temp1 extends Struct.SingleTypeSchema {
+  collectionName: 'temp1s';
+  info: {
+    displayName: 'Temp1';
+    pluralName: 'temp1s';
+    singularName: 'temp1';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::temp1.temp1'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Temp: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTemp2Temp2 extends Struct.CollectionTypeSchema {
+  collectionName: 'temp2s';
+  info: {
+    displayName: 'Temp2';
+    pluralName: 'temp2s';
+    singularName: 'temp2';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::temp2.temp2'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Temp: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1011,6 +1061,8 @@ declare module '@strapi/strapi' {
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::layout.layout': ApiLayoutLayout;
       'api::navigation-bar.navigation-bar': ApiNavigationBarNavigationBar;
+      'api::temp1.temp1': ApiTemp1Temp1;
+      'api::temp2.temp2': ApiTemp2Temp2;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
