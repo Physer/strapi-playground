@@ -6,5 +6,8 @@
   },
   "[bicep]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-bicep"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   }
 }

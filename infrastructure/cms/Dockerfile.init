@@ -1,3 +1,9 @@
-FROM mysql:latest
+FROM alpine:latest
+RUN apk update && \
+    apk add --no-cache postgresql17-client
 
-ENTRYPOINT mysql --protocol=tcp -h $SQL_HOST -u$SQL_ROOT_USER -p$SQL_ROOT_PASSWORD -e "CREATE USER IF NOT EXISTS '$SQL_CMS_USER'@'%' IDENTIFIED BY '$SQL_CMS_PASSWORD'; ALTER USER '$SQL_CMS_USER' IDENTIFIED BY '$SQL_CMS_PASSWORD'; GRANT ALL PRIVILEGES ON $SQL_DATABASE_NAME . * TO '$SQL_CMS_USER'@'%'; FLUSH PRIVILEGES;"
+WORKDIR /scripts
+COPY ./infrastructure/cms/database-init.sh .
+RUN chmod +x ./database-init.sh
+
+ENTRYPOINT ["./database-init.sh"]

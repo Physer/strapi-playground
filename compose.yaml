@@ -1,13 +1,13 @@
 services:
   database:
     container_name: database
-    image: mysql:latest
+    image: postgres:latest
     env_file:
       - cms/.env
     volumes:
-      - cms-data:/var/lib/mysql
+      - cms-data:/var/lib/postgresql/data
     ports:
-      - 3306:3306
+      - 5432:5432
     restart: always
 
   database-init:
@@ -29,7 +29,7 @@ services:
     env_file:
       - cms/.env
     environment:
-      - DATABASE_CLIENT=mysql
+      - DATABASE_CLIENT=postgres
       - DATABASE_HOST=database
     ports:
       - 1337
