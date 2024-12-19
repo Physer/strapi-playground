@@ -3,6 +3,7 @@ import { appendHash } from '../utilities.bicep'
 param databaseClient string
 param databaseName string
 param databaseCmsUser string
+param databaseSchema string
 param logAnalyticsWorkspaceName string
 param keyVaultName string
 param registryName string
@@ -63,6 +64,10 @@ module cmsContainerApp '../modules/containerApp.bicep' = {
         value: databaseCmsUser
       }
       {
+        name: 'DATABASE_SCHEMA'
+        value: databaseSchema
+      }
+      {
         name: 'SQL_ROOT_USER'
         value: postgres.outputs.sqlAdminUser
       }
@@ -77,6 +82,10 @@ module cmsContainerApp '../modules/containerApp.bicep' = {
       {
         name: 'SQL_DATABASE_NAME'
         value: databaseName
+      }
+      {
+        name: 'SQL_SCHEMA'
+        value: databaseSchema
       }
     ]
     secrets: [

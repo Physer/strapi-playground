@@ -110,4 +110,5 @@ jobs:
             cmsInitImageName=${{ needs.deploy_infra.outputs.containerRegistryLoginServer }}/cms/init:latest
             databaseName=${{ vars.CMS_DATABASE_NAME }}
             databaseCmsUser=${{ vars.CMS_DATABASE_USER }}
+            databaseSchema=${{ vars.CMS_DATABASE_SCHEMA }}
           region: ${{ vars.AZURE_REGION }}
