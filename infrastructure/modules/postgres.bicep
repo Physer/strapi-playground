@@ -2,6 +2,7 @@ import { appendHash } from '../utilities.bicep'
 
 param skuName string = 'Standard_B1ms'
 param skuTier string = 'Burstable'
+param storage int = 20
 @secure()
 param sqlPassword string
 param databaseName string
@@ -17,6 +18,18 @@ resource postgres 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01' = {
     administratorLogin: 'postgresadmin'
     administratorLoginPassword: sqlPassword
     version: '14'
+    highAvailability: {
+      mode: 'Disabled'
+    }
+    storage: {
+      type: 'PremiumV2_LRS'
+      storageSizeGB: storage
+      autoGrow: 'Enabled'
+    }
+    backup: {
+      geoRedundantBackup: 'Disabled'
+      backupRetentionDays: 7
+    }
   }
 }
 
