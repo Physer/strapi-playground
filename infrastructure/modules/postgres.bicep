@@ -22,9 +22,7 @@ resource postgres 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01' = {
       mode: 'Disabled'
     }
     storage: {
-      type: 'PremiumV2_LRS'
       storageSizeGB: storage
-      autoGrow: 'Enabled'
     }
     backup: {
       geoRedundantBackup: 'Disabled'
