@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "psqlcts",
+  "info": {
+    "singularName": "psqlct",
+    "pluralName": "psqlcts",
+    "displayName": "Psqlct"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "psql3": {
+      "type": "string"
+    }
+  }
+}

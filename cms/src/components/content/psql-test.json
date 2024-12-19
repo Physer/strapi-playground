@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_content_psql_tests",
+  "info": {
+    "displayName": "PsqlTest",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "psql": {
+      "type": "string"
+    }
+  }
+}

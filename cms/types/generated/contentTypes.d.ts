@@ -498,6 +498,62 @@ export interface ApiNavigationBarNavigationBar
   };
 }
 
+export interface ApiPsqlctPsqlct extends Struct.CollectionTypeSchema {
+  collectionName: 'psqlcts';
+  info: {
+    displayName: 'Psqlct';
+    pluralName: 'psqlcts';
+    singularName: 'psqlct';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::psqlct.psqlct'
+    > &
+      Schema.Attribute.Private;
+    psql3: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPsqlstPsqlst extends Struct.SingleTypeSchema {
+  collectionName: 'psqlsts';
+  info: {
+    displayName: 'Psqlst';
+    pluralName: 'psqlsts';
+    singularName: 'psqlst';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::psqlst.psqlst'
+    > &
+      Schema.Attribute.Private;
+    psql2: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiTemp1Temp1 extends Struct.SingleTypeSchema {
   collectionName: 'temp1s';
   info: {
@@ -1061,6 +1117,8 @@ declare module '@strapi/strapi' {
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::layout.layout': ApiLayoutLayout;
       'api::navigation-bar.navigation-bar': ApiNavigationBarNavigationBar;
+      'api::psqlct.psqlct': ApiPsqlctPsqlct;
+      'api::psqlst.psqlst': ApiPsqlstPsqlst;
       'api::temp1.temp1': ApiTemp1Temp1;
       'api::temp2.temp2': ApiTemp2Temp2;
       'plugin::content-releases.release': PluginContentReleasesRelease;

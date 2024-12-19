@@ -64,6 +64,17 @@ export interface ContentHero extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentPsqlTest extends Struct.ComponentSchema {
+  collectionName: 'components_content_psql_tests';
+  info: {
+    displayName: 'PsqlTest';
+    icon: 'alien';
+  };
+  attributes: {
+    psql: Schema.Attribute.String;
+  };
+}
+
 export interface NavigationNavigationItem extends Struct.ComponentSchema {
   collectionName: 'components_navigation_navigation_items';
   info: {
@@ -84,6 +95,7 @@ declare module '@strapi/strapi' {
       'carousel.carousel-text': CarouselCarouselText;
       'content.banner': ContentBanner;
       'content.hero': ContentHero;
+      'content.psql-test': ContentPsqlTest;
       'navigation.navigation-item': NavigationNavigationItem;
     }
   }

@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "psqlsts",
+  "info": {
+    "singularName": "psqlst",
+    "pluralName": "psqlsts",
+    "displayName": "Psqlst"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "psql2": {
+      "type": "string"
+    }
+  }
+}
