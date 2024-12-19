@@ -2,7 +2,7 @@ import { appendHash } from '../utilities.bicep'
 
 param skuName string = 'Standard_B1ms'
 param skuTier string = 'Burstable'
-param storage int = 20
+param storage int = 128
 @secure()
 param sqlPassword string
 param databaseName string
