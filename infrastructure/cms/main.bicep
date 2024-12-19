@@ -2,6 +2,7 @@ import { appendHash } from '../utilities.bicep'
 
 param databaseClient string
 param databaseName string
+param databaseCmsUser string
 param logAnalyticsWorkspaceName string
 param keyVaultName string
 param registryName string
@@ -9,7 +10,6 @@ param identityName string
 param cmsImageName string
 param cmsInitImageName string = ''
 
-var strapiSqlUser = 'strapi-user'
 var mySqlAdminPasswordKeyVaultReference = 'mysql-admin-password'
 var cmsSqlPasswordKeyVaultReference = 'database-password'
 
@@ -60,7 +60,7 @@ module cmsContainerApp '../modules/containerApp.bicep' = {
       }
       {
         name: 'DATABASE_USERNAME'
-        value: strapiSqlUser
+        value: databaseCmsUser
       }
       {
         name: 'SQL_ROOT_USER'
@@ -72,7 +72,7 @@ module cmsContainerApp '../modules/containerApp.bicep' = {
       }
       {
         name: 'SQL_CMS_USER'
-        value: strapiSqlUser
+        value: databaseCmsUser
       }
       {
         name: 'SQL_DATABASE_NAME'
